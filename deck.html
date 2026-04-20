@@ -466,7 +466,7 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
     <div style="padding-top: 20px;">
       <p style="font-size: 30px; font-weight: 500; color: var(--ink); line-height: 1.35; margin-bottom: 24px;">Everything I'll show today is what I actually use.</p>
       <p style="font-size: 22px; color: var(--ink-soft); line-height: 1.5;">Not a demo built for this room. Not a prototype. The system I open every morning to run Lumif.ai, where we're automating insurance compliance for subcontractor-heavy industries.</p>
-      <p style="font-size: 20px; color: var(--muted); line-height: 1.5; margin-top: 20px; font-style: italic;">Ninety minutes from now, you'll have the same kind of thing, built for your work.</p>
+      <p style="font-size: 20px; color: var(--muted); line-height: 1.5; margin-top: 20px; font-style: italic;">By the end of this workshop, you'll have the first version of a skill built for your work.</p>
     </div>
   </div>
   <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">2</span></div>
@@ -485,7 +485,7 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
       <div class="watch-card">
         <div class="n">01</div>
         <div class="t">No upload, no web tool</div>
-        <div class="d">Claude reads the PDF where it lives on my disk. The file isn't dragged into a chat window or stored by a third party.</div>
+        <div class="d">Claude reads the PDF where it lives on my disk. No web UI, no cloud storage. Content goes to Anthropic's API for inference, then gone.</div>
       </div>
       <div class="watch-card">
         <div class="n">02</div>
@@ -507,7 +507,7 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
 <!-- ============================================================ -->
 <section class="slide">
   <span class="badge">What Just Happened</span>
-  <h1>That wasn't ChatGPT.</h1>
+  <h1>That wasn't a chat window.</h1>
   <div class="grid-2" style="margin-top: 28px; gap: 44px;">
     <div class="card dark">
       <h3 style="color: white;">A chatbot lives behind a chat window.</h3>
@@ -531,7 +531,7 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
   <h1>The primitives just stabilized.</h1>
   <p class="small" style="margin-top: -8px; margin-bottom: 36px; font-size: 19px;">Three years ago this talk was impossible. Here's what changed.</p>
   <div class="timeline">
-    <div class="timeline-year">2023</div>
+    <div class="timeline-year">2022</div>
     <div class="timeline-what">ChatGPT goes mainstream. <span class="detail">Smart, bounded, a chat window. Useful but sealed off from your work.</span></div>
 
     <div class="timeline-year">2024</div>
@@ -665,13 +665,13 @@ Flag anything I'd regret signing.</pre>
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); margin-bottom: 6px; letter-spacing: 0.06em;">CLAUDE.md</div>
       <div class="card-title">Your standing rules.</div>
       <div class="card-body">How you want Claude to work. Style, defaults, things to never do.</div>
-      <p class="small" style="margin-top: 14px; font-style: italic; font-size: 15px;">&ldquo;Never use em dashes. Save outputs to ~/claude-outputs.&rdquo;</p>
+      <p class="small" style="margin-top: 14px; font-style: italic; font-size: 15px;">&ldquo;Respond in bullet points by default. Save outputs to ~/claude-outputs.&rdquo;</p>
     </div>
     <div class="card">
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); margin-bottom: 6px; letter-spacing: 0.06em;">memory/*.md</div>
       <div class="card-title">Your history.</div>
       <div class="card-body">Facts Claude has learned about you. Grows with every session.</div>
-      <p class="small" style="margin-top: 14px; font-style: italic; font-size: 15px;">&ldquo;User is a buyer. Prefers bullets. Working on Philips POC.&rdquo;</p>
+      <p class="small" style="margin-top: 14px; font-style: italic; font-size: 15px;">&ldquo;User is a buyer. Prefers bullets. Active on a vendor selection.&rdquo;</p>
     </div>
     <div class="card">
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); margin-bottom: 6px; letter-spacing: 0.06em;">skills/{name}/SKILL.md</div>
@@ -755,7 +755,7 @@ Flag anything I'd regret signing.</pre>
     <div class="demo-num">Live Demo · 2 of 3</div>
     <div class="demo-title">Prompt → Presentation.</div>
     <p class="demo-pain"><strong style="color: var(--ink);">The setup:</strong> You have 60 minutes before a pitch. You need a 10-slide deck. Your normal loop (research, decide, design, build) eats three hours.</p>
-    <p class="demo-pain" style="margin-top: 18px;"><strong style="color: var(--accent);">Watch this:</strong> I take a topic from this room. Claude produces a real PPTX. Cover, sections, charts, conclusions. Opens in PowerPoint in under two minutes.</p>
+    <p class="demo-pain" style="margin-top: 18px;"><strong style="color: var(--accent);">Watch this:</strong> I take a topic from this room. Claude produces a real PPTX. Cover, sections, charts, conclusions. Opens in PowerPoint within minutes.</p>
     <div class="watch-row">
       <div class="watch-card">
         <div class="n">01</div>
@@ -810,7 +810,7 @@ Flag anything I'd regret signing.</pre>
     <span class="badge">Pause</span>
     <h1 style="font-size: 76px;">Three demos. Three jobs done.</h1>
     <p style="font-size: 28px; color: var(--ink-soft); line-height: 1.5; margin-top: 12px;">Lawyer work. Slide work. Salesperson work.</p>
-    <p style="font-size: 28px; color: var(--ink-soft); line-height: 1.5;">Each skill: under 100 lines of markdown.</p>
+    <p style="font-size: 28px; color: var(--ink-soft); line-height: 1.5;">Each skill: a short file. No code, no deployment.</p>
     <p style="font-size: 28px; color: var(--ink-soft); line-height: 1.5;">Each one: built once, runs forever.</p>
     <p style="font-size: 34px; font-weight: 600; color: var(--accent); margin-top: 44px;">Now imagine thirty of these. For everything you do twice.</p>
   </div>
@@ -984,7 +984,7 @@ Use the job-hunt-copilot skill on this job:
   <span class="badge">The Reveal</span>
   <h1>What you just built is v1.</h1>
   <h1 style="color: var(--accent);">Here's v3.</h1>
-  <p>Same skill. Another evening of work. Now it does this:</p>
+  <p>Same skill. A weekend of work. Now it does this:</p>
   <div class="grid-2" style="margin-top: 16px; gap: 24px;">
     <div class="card tinted">
       <div class="card-title">+ Browser auto-fill</div>
@@ -1083,10 +1083,10 @@ Use the job-hunt-copilot skill on this job:
     <div>
       <h3 style="margin-top: 0;">Official</h3>
       <ul>
-        <li><strong>claude.ai/code</strong>. Install Claude Code.</li>
-        <li><strong>docs.claude.com</strong>. All the documentation.</li>
-        <li><strong>anthropic.com/engineering/building-effective-agents</strong></li>
-        <li><strong>anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills</strong></li>
+        <li><strong><a href="https://claude.ai/code" target="_blank" style="color: var(--accent);">claude.ai/code</a></strong>. Install Claude Code.</li>
+        <li><strong><a href="https://docs.claude.com" target="_blank" style="color: var(--accent);">docs.claude.com</a></strong>. All the documentation.</li>
+        <li><strong><a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" style="color: var(--accent);">anthropic.com/engineering/building-effective-agents</a></strong></li>
+        <li><strong><a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" style="color: var(--accent);">anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills</a></strong></li>
       </ul>
       <h3 style="margin-top: 24px;">Today's materials</h3>
       <p style="font-size: 20px; margin: 0 0 6px;">Everything we used today:</p>
