@@ -196,7 +196,7 @@
 
       <div class="footer">
         <p>Built by <strong>Sharan JM</strong> · ASB Class of 2018 · Now co-founder &amp; CPO at <a href="https://lumif.ai" target="_blank">Lumif.ai</a></p>
-        <p>Questions or built something cool? <strong>careers@lumif.ai</strong></p>
+        <p>Questions or built something cool? Email <strong>sharan.jm16@gmail.com</strong> or reach me on <a href="https://www.linkedin.com/in/sharanjm/" target="_blank">LinkedIn</a>.</p>
       </div>
     </div>
 
@@ -212,7 +212,7 @@
   const enterBtn = document.getElementById('enter-btn');
 
   function grant() {
-    sessionStorage.setItem('asb-access', 'granted');
+    localStorage.setItem('asb-access', 'granted');
     gate.classList.add('hidden');
     content.classList.remove('hidden');
   }
@@ -235,7 +235,7 @@
   pwInput.addEventListener('input', () => err.classList.add('hidden'));
 
   // persist across reloads in same session
-  if (sessionStorage.getItem('asb-access') === 'granted') {
+  if (localStorage.getItem('asb-access') === 'granted') {
     grant();
   }
 </script>
