@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script>
+if (sessionStorage.getItem('asb-access') !== 'granted' && !location.search.includes('bypass')) {
+  location.href = 'index.html';
+}
+</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Claude Code for Business · ASB Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F4EE;
+    --bg-tint: #EBE7DC;
+    --ink: #141413;
+    --ink-soft: #2A2825;
+    --muted: #6B675F;
+    --line: #D9D5CA;
+    --accent: #CC785C;
+    --accent-soft: #F1E4DD;
+    --warn: #8A6A1E;
+    --warn-soft: #F0E6CA;
+    --code-bg: #141413;
+    --code-ink: #F5F4EE;
+    --code-accent: #E5A78A;
+    --code-string: #D7C99A;
+    --code-comment: #8A847A;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+
+  .deck { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: 64px 96px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .slide.active { display: flex; }
+  .slide.dark {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .slide.dark h1, .slide.dark h2, .slide.dark h3, .slide.dark p, .slide.dark li { color: var(--bg); }
+  .slide.dark .footer-bar { color: rgba(245,244,238,0.5); border-top-color: rgba(245,244,238,0.12); }
+  .slide.dark .badge { background: rgba(204,120,92,0.18); color: var(--code-accent); }
+
+  h1 { font-size: 64px; font-weight: 700; line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 24px; }
+  h2 { font-size: 44px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 28px; }
+  h3 { font-size: 26px; font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 16px; color: var(--ink-soft); }
+  p { font-size: 22px; line-height: 1.5; margin: 0 0 18px; color: var(--ink-soft); }
+  ul, ol { font-size: 22px; line-height: 1.6; margin: 0 0 24px; padding-left: 28px; color: var(--ink-soft); }
+  li { margin-bottom: 8px; }
+  li::marker { color: var(--accent); }
+
+  .small { font-size: 18px; color: var(--muted); }
+  .tiny { font-size: 13px; color: var(--muted); }
+  .accent { color: var(--accent); }
+  .ink { color: var(--ink); }
+  .strong { font-weight: 700; color: var(--ink); }
+
+  .badge {
+    display: inline-block;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-bottom: 24px;
+  }
+  .footer-bar {
+    position: absolute;
+    bottom: 28px; left: 96px; right: 96px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    letter-spacing: 0.04em;
+  }
+  .pagenum { font-variant-numeric: tabular-nums; }
+
+  .center { align-items: center; justify-content: center; text-align: center; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+
+  .card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 26px;
+  }
+  .card.tinted { background: var(--accent-soft); border-color: transparent; }
+  .card.warn { background: var(--warn-soft); border-color: transparent; }
+  .card.dark { background: var(--ink); color: white; border-color: transparent; }
+  .card.dark h3, .card.dark p, .card.dark li { color: white; }
+  .card-title { font-size: 18px; font-weight: 700; color: var(--ink); margin: 0 0 12px; }
+  .card-body { font-size: 17px; line-height: 1.5; color: var(--ink-soft); }
+  .card.dark .card-body { color: rgba(255,255,255,0.82); }
+
+  pre, code { font-family: 'JetBrains Mono', Menlo, monospace; font-size: 15px; }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 22px 26px;
+    border-radius: 10px;
+    overflow: hidden;
+    line-height: 1.6;
+    margin: 0 0 20px;
+  }
+  pre .k { color: var(--code-accent); }
+  pre .c { color: var(--code-comment); font-style: italic; }
+  pre .s { color: var(--code-string); }
+  code.inline {
+    background: var(--bg-tint);
+    color: var(--ink);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 17px;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 18px; }
+  th, td {
+    text-align: left;
+    padding: 13px 18px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    color: var(--ink-soft);
+  }
+  th { font-weight: 600; color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; }
+  tr:last-child td { border-bottom: none; }
+
+  .step { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 16px; }
+  .step-num {
+    flex: 0 0 40px; height: 40px; width: 40px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 16px;
+  }
+  .step-body { flex: 1; padding-top: 6px; }
+  .step-body .t { font-weight: 600; color: var(--ink); font-size: 19px; margin-bottom: 4px; }
+  .step-body .d { color: var(--muted); font-size: 16px; line-height: 1.5; }
+
+  .callout {
+    border-left: 3px solid var(--accent);
+    padding: 16px 24px;
+    background: var(--accent-soft);
+    border-radius: 0 10px 10px 0;
+    font-size: 20px;
+    color: var(--ink-soft);
+    margin: 16px 0;
+  }
+  .callout.warn { border-color: var(--warn); background: var(--warn-soft); }
+  .callout .attr {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 15px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* title slide */
+  .title-slide { background: var(--bg); }
+  .title-slide .pre { font-size: 13px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; }
+  .title-slide .main-title { font-size: 124px; font-weight: 800; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 28px; color: var(--ink); }
+  .title-slide .sub-lead { font-size: 36px; font-weight: 500; color: var(--ink); max-width: 900px; line-height: 1.2; margin-bottom: 12px; }
+  .title-slide .sub-follow { font-size: 22px; font-weight: 400; color: var(--muted); max-width: 900px; line-height: 1.3; margin-bottom: 72px; }
+  .title-slide .meta { font-size: 15px; color: var(--muted); display: flex; gap: 32px; letter-spacing: 0.04em; }
+
+  /* about me */
+  .bio-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .bio-row:last-of-type { border-bottom: none; }
+  .bio-when {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .bio-what { font-size: 22px; color: var(--ink); font-weight: 500; }
+  .bio-what .muted { color: var(--muted); font-weight: 400; }
+
+  /* why-now timeline */
+  .timeline {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    row-gap: 18px;
+    column-gap: 28px;
+    align-items: baseline;
+  }
+  .timeline-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .timeline-year.hl { color: var(--accent); }
+  .timeline-what { font-size: 22px; color: var(--ink); font-weight: 500; }
+  .timeline-what .detail { color: var(--muted); font-weight: 400; font-size: 18px; display: block; margin-top: 2px; }
+
+  /* demo slide */
+  .demo-frame { display: flex; flex-direction: column; justify-content: center; height: 100%; }
+  .demo-num { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 18px; }
+  .demo-title { font-size: 76px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin-bottom: 28px; color: var(--ink); }
+  .slide.dark .demo-title { color: var(--bg); }
+  .demo-pain { font-size: 23px; color: var(--ink-soft); line-height: 1.4; max-width: 960px; }
+  .slide.dark .demo-pain { color: rgba(245,244,238,0.82); }
+  .watch-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 36px; }
+  .watch-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .slide.dark .watch-card {
+    background: rgba(245,244,238,0.06);
+    border-color: rgba(245,244,238,0.14);
+  }
+  .watch-card .n {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .watch-card .t { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .watch-card .d { font-size: 14px; color: var(--muted); line-height: 1.45; }
+  .slide.dark .watch-card .t { color: var(--bg); }
+  .slide.dark .watch-card .d { color: rgba(245,244,238,0.7); }
+
+  /* ladder */
+  .ladder-grid {
+    display: grid;
+    grid-template-columns: 50px 200px 1fr 220px;
+    column-gap: 28px;
+    row-gap: 14px;
+    align-items: center;
+  }
+  .ladder-num { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 600; color: var(--muted); }
+  .ladder-num.hl { color: var(--accent); }
+  .ladder-name { font-size: 24px; font-weight: 700; color: var(--ink); }
+  .ladder-name.hl { color: var(--accent); }
+  .ladder-flow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    color: var(--ink-soft);
+    background: var(--bg-tint);
+    padding: 10px 16px;
+    border-radius: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ladder-ex { font-size: 15px; color: var(--muted); font-style: italic; }
+  .ladder-sep { grid-column: 1 / -1; height: 1px; background: var(--line); }
+
+  /* anatomy */
+  .anatomy-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 20px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .anatomy-row:last-of-type { border-bottom: none; }
+  .anatomy-k { font-weight: 600; color: var(--ink); font-size: 16px; }
+  .anatomy-v { color: var(--muted); font-size: 17px; line-height: 1.5; }
+
+  /* matrix slide */
+  .video-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  }
+  .video-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  .matrix-quote {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-top: 16px;
+  }
+  .matrix-quote em { color: var(--accent); font-style: italic; }
+  .onboard-quote {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 28px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .spec-row {
+    padding: 13px 18px;
+    background: var(--bg-tint);
+    border-radius: 8px;
+    font-size: 17px;
+    color: var(--ink-soft);
+  }
+  .spec-row strong { color: var(--ink); font-weight: 600; }
+  .spec-row em { color: var(--accent); font-style: italic; font-weight: 500; }
+
+  /* big quote slide */
+  .big-quote {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 60px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin: 0 0 32px;
+    text-indent: -0.3em;
+  }
+  .big-quote-attr {
+    font-size: 18px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+
+  /* screenshot with hand-drawn circle overlay */
+  .screenshot-frame {
+    position: relative;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.09);
+    max-height: 620px;
+    overflow: hidden;
+  }
+  .screenshot-img {
+    width: 100%;
+    display: block;
+    border-radius: 6px;
+  }
+  .highlight-circle {
+    position: absolute;
+    top: 11%;
+    left: 2%;
+    width: 96%;
+    height: 26%;
+    border: 3px solid var(--accent);
+    border-radius: 48% 52% 46% 54% / 52% 48% 54% 46%;
+    transform: rotate(-1.2deg);
+    pointer-events: none;
+    opacity: 0.92;
+  }
+
+  .nav-hint {
+    position: fixed;
+    bottom: 8px;
+    right: 12px;
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.45;
+  }
+
+  @media print {
+    html, body { overflow: visible; background: white; }
+    .deck { height: auto; width: auto; }
+    .slide {
+      display: flex !important;
+      position: relative;
+      page-break-after: always;
+      width: 11in; height: 8.5in;
+      padding: 0.6in 0.8in;
+    }
+    .nav-hint, .footer-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- ============================================================ -->
+<!-- SLIDE 1 · Title -->
+<!-- ============================================================ -->
+<section class="slide active title-slide center">
+  <div style="text-align: left; max-width: 1200px;">
+    <div class="pre">Asia School of Business · Workshop</div>
+    <div class="main-title">Claude Code<br/>for Business.</div>
+    <div class="sub-lead">Build the tools your work needs.</div>
+    <div class="sub-follow">No engineering background required.</div>
+    <div class="meta">
+      <span><strong style="color: var(--ink);">Sharan JM</strong></span>
+      <span>April 2026</span>
+      <span>Kuala Lumpur</span>
+    </div>
+  </div>
+  <div class="footer-bar"><span></span><span class="pagenum">1</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2 · About me (NEW) -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">Before We Start</span>
+  <h1>I sat in these seats. Class of 2018.</h1>
+  <div class="grid-2" style="gap: 44px; margin-top: 20px; align-items: flex-start;">
+    <div>
+      <div class="bio-row">
+        <div class="bio-when">2018</div>
+        <div class="bio-what">ASB <span class="muted">· MBA</span></div>
+      </div>
+      <div class="bio-row">
+        <div class="bio-when">2018–21</div>
+        <div class="bio-what">AirAsia <span class="muted">· Senior Product Manager</span></div>
+      </div>
+      <div class="bio-row">
+        <div class="bio-when">2022</div>
+        <div class="bio-what">MIT Sloan <span class="muted">· MSMS</span></div>
+      </div>
+      <div class="bio-row">
+        <div class="bio-when">2022–23</div>
+        <div class="bio-what">Amazon <span class="muted">· PM Tech, Ads Science &amp; ML</span></div>
+      </div>
+      <div class="bio-row">
+        <div class="bio-when">Then</div>
+        <div class="bio-what">Healthtech startup <span class="muted">· Co-founder</span></div>
+      </div>
+      <div class="bio-row">
+        <div class="bio-when">Then</div>
+        <div class="bio-what">Roshn <span class="muted">· Head of Product, digital transformation</span></div>
+      </div>
+      <div class="bio-row">
+        <div class="bio-when">Now</div>
+        <div class="bio-what">Lumif.ai <span class="muted">· Co-founder &amp; CPO</span></div>
+      </div>
+    </div>
+    <div style="padding-top: 20px;">
+      <p style="font-size: 30px; font-weight: 500; color: var(--ink); line-height: 1.35; margin-bottom: 24px;">Everything I'll show today is what I actually use.</p>
+      <p style="font-size: 22px; color: var(--ink-soft); line-height: 1.5;">Not a demo built for this room. Not a prototype. The system I open every morning to run Lumif.ai, where we're automating insurance compliance for subcontractor-heavy industries.</p>
+      <p style="font-size: 20px; color: var(--muted); line-height: 1.5; margin-top: 20px; font-style: italic;">Ninety minutes from now, you'll have the same kind of thing, built for your work.</p>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">2</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3 · DEMO 1 · Legal Reviewer (cold open) -->
+<!-- ============================================================ -->
+<section class="slide">
+  <div class="demo-frame">
+    <div class="demo-num">Live Demo · 1 of 3</div>
+    <div class="demo-title">Legal Reviewer.</div>
+    <p class="demo-pain"><strong style="color: var(--ink);">The setup:</strong> Every professional deals with contracts. NDAs, vendor MSAs, offer letters, service agreements. Most don't read them carefully. Few can tell what's standard from what's a trap.</p>
+    <p class="demo-pain" style="margin-top: 18px;"><strong style="color: var(--accent);">Watch this:</strong> Drop a contract PDF in. Get back a one-page brief. What's standard, what's risky, suggested redlines, questions to raise.</p>
+    <div class="watch-row">
+      <div class="watch-card">
+        <div class="n">01</div>
+        <div class="t">No upload, no web tool</div>
+        <div class="d">Claude reads the PDF where it lives on my disk. The file isn't dragged into a chat window or stored by a third party.</div>
+      </div>
+      <div class="watch-card">
+        <div class="n">02</div>
+        <div class="t">It knows I'm a buyer, not a vendor</div>
+        <div class="d">Memory stored once, applied forever. Weighs the analysis toward my side of the table.</div>
+      </div>
+      <div class="watch-card">
+        <div class="n">03</div>
+        <div class="t">Output is a file, not chat</div>
+        <div class="d">Markdown brief I can attach to an email, share with my lawyer, search later.</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">3</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4 · What just happened (simplified) -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">What Just Happened</span>
+  <h1>That wasn't ChatGPT.</h1>
+  <div class="grid-2" style="margin-top: 28px; gap: 44px;">
+    <div class="card dark">
+      <h3 style="color: white;">A chatbot lives behind a chat window.</h3>
+      <p style="color: rgba(255,255,255,0.85);">Answers questions. Can't reach your files. Can't drive your browser. Can't run when you're not watching. Can't be packaged and shared as a recipe.</p>
+    </div>
+    <div>
+      <h3 style="margin-top: 0;">Claude Code does work.</h3>
+      <p>It reads your files. Runs your tools. Remembers your preferences. Produces real deliverables on disk, in the shape you asked for.</p>
+      <p>The thing that made it do all that was a <em>skill</em>. 38 lines of plain English in a file.</p>
+    </div>
+  </div>
+  <p class="callout" style="margin-top: 24px;"><strong>That skill is the primitive of this talk.</strong> Everything else is how you write one, share one, and use them to collapse recurring work.</p>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">4</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5 · Why now (NEW) -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">Why Now</span>
+  <h1>The primitives just stabilized.</h1>
+  <p class="small" style="margin-top: -8px; margin-bottom: 36px; font-size: 19px;">Three years ago this talk was impossible. Here's what changed.</p>
+  <div class="timeline">
+    <div class="timeline-year">2023</div>
+    <div class="timeline-what">ChatGPT goes mainstream. <span class="detail">Smart, bounded, a chat window. Useful but sealed off from your work.</span></div>
+
+    <div class="timeline-year">2024</div>
+    <div class="timeline-what">Prompt chaining and early tool use. <span class="detail">First real workflows. Still fragile. Still needed engineers.</span></div>
+
+    <div class="timeline-year">2025</div>
+    <div class="timeline-what">Agents. Memory. MCP. <span class="detail">Models can plan, act, observe, iterate. Pipelines become reliable.</span></div>
+
+    <div class="timeline-year hl">2026</div>
+    <div class="timeline-what"><strong>Skills.</strong> <span class="detail">Anyone who can write a paragraph can teach an agent a job. That's today.</span></div>
+  </div>
+  <p class="callout" style="margin-top: 36px;">You're not early to AI. <strong>You're early to using it properly.</strong></p>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">5</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6 · The ladder -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">Mental Model · The Ladder</span>
+  <h1>From chat to skill: four rungs.</h1>
+  <p class="small" style="margin-top: -8px; margin-bottom: 28px; font-size: 19px;">Each rung includes the one below and adds one new power.</p>
+  <div class="ladder-grid">
+    <div class="ladder-num">1</div>
+    <div class="ladder-name">LLM chat</div>
+    <div class="ladder-flow">[question] → [answer]</div>
+    <div class="ladder-ex">ChatGPT tab.</div>
+
+    <div class="ladder-sep"></div>
+
+    <div class="ladder-num">2</div>
+    <div class="ladder-name">Workflow</div>
+    <div class="ladder-flow">[step] → [step] → [step]</div>
+    <div class="ladder-ex">Zapier with AI steps.</div>
+
+    <div class="ladder-sep"></div>
+
+    <div class="ladder-num">3</div>
+    <div class="ladder-name">Agent</div>
+    <div class="ladder-flow">[plan → act → observe] repeat until done</div>
+    <div class="ladder-ex">Claude Code.</div>
+
+    <div class="ladder-sep"></div>
+
+    <div class="ladder-num hl">4</div>
+    <div class="ladder-name hl">Skill</div>
+    <div class="ladder-flow">[expertise file] + agent → specialist</div>
+    <div class="ladder-ex">The Matrix kung-fu file.</div>
+  </div>
+  <p class="callout" style="margin-top: 28px;">"Agents are models using tools in a loop."<span class="attr">Barry Zhang, Anthropic</span></p>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">6</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7 · A skill is a folder -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">What a Skill IS</span>
+  <h1>A skill is a folder. With markdown in it.</h1>
+  <p>That's it. That's the whole thing.</p>
+  <div style="margin-top: 20px;">
+    <pre><span class="c"># The entire Legal Reviewer skill on my machine:</span>
+
+~/.claude/skills/legal-reviewer/
+├── SKILL.md              <span class="c"># the recipe (38 lines)</span>
+├── examples/
+│   ├── nda-template.md
+│   └── msa-template.md
+└── output-format.md      <span class="c"># the deliverable shape</span></pre>
+  </div>
+  <p class="callout"><strong>You can read it. You can edit it. You can share it with a friend like a recipe.</strong> No code, no compilation, no deployment.</p>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">7</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8 · Anatomy -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">Anatomy</span>
+  <h2>What's inside SKILL.md</h2>
+  <div class="grid-2" style="gap: 40px; align-items: flex-start;">
+    <pre style="margin-top: 0;"><span class="k">---</span>
+name: legal-reviewer
+description: Review contracts and
+  surface risks, redlines, and questions
+when_to_use: User shares a PDF or
+  asks to review a contract
+<span class="k">---</span>
+
+<span class="c"># What this skill does</span>
+
+When the user shares a contract:
+
+1. Read the document.
+2. Identify clauses that are
+   non-standard or risky to a buyer.
+3. Suggest specific redlines.
+4. List 3 questions to raise with
+   counsel before signing.
+5. Save as a one-page brief to
+   <span class="s">~/contracts/{name}-{date}.md</span>
+
+<span class="c"># Tone</span>
+Plain English. Skip legalese.
+Flag anything I'd regret signing.</pre>
+    <div>
+      <h3 style="margin-top: 0;">Two sections. That's it.</h3>
+      <div class="anatomy-row">
+        <div class="anatomy-k">Frontmatter</div>
+        <div class="anatomy-v">Metadata at the top. Name and description. This is how Claude decides when to use this skill.</div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-k">Body</div>
+        <div class="anatomy-v">Plain-English instructions. Treat it like a note to a smart colleague on their first day.</div>
+      </div>
+      <p class="callout" style="margin-top: 24px; font-size: 19px;">If you can write a paragraph explaining how you do your job, <strong>you can write a skill.</strong></p>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">8</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9 · Matrix (video) + onboarding -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">What a Skill FEELS LIKE</span>
+  <h2>Two ways to think about it.</h2>
+  <div class="grid-2" style="gap: 44px; align-items: flex-start;">
+    <div>
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/0YhJxJZOWBw"
+          title="The Matrix: I Know Kung Fu"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+      <div class="matrix-quote">
+        Neo doesn't study kung fu.<br/>
+        A file loads.<br/>
+        He opens his eyes: <em>&ldquo;I know kung fu.&rdquo;</em>
+      </div>
+      <p class="tiny" style="font-style: italic;">The Matrix (1999), Warner Bros. · used for illustration.</p>
+    </div>
+    <div>
+      <div class="onboard-quote">
+        &ldquo;Building a skill for an agent is like putting together an onboarding guide for a new hire.&rdquo;
+      </div>
+      <p class="small" style="margin-top: 10px; font-style: italic;">Anthropic · Agent Skills post</p>
+      <div style="margin-top: 32px; display: flex; flex-direction: column; gap: 10px;">
+        <div class="spec-row"><strong>Contract to review?</strong> <em>Claude knows contracts.</em></div>
+        <div class="spec-row"><strong>Deck to build?</strong> <em>Claude knows slides.</em></div>
+        <div class="spec-row"><strong>Spreadsheet to analyze?</strong> <em>Claude knows pandas.</em></div>
+        <div class="spec-row"><strong>Your specific job?</strong> <em>Claude knows you.</em></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">9</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10 · Andrew Chen quote -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">The Shift</span>
+  <h2>Andrew Chen, on LinkedIn, last week.</h2>
+  <div class="grid-2" style="gap: 44px; align-items: flex-start; margin-top: 12px;">
+    <div class="screenshot-frame">
+      <img src="./images/andrew-chen-linkedin.png" alt="Andrew Chen LinkedIn post on coding as a baseline skill" class="screenshot-img" />
+      <div class="highlight-circle"></div>
+    </div>
+    <div>
+      <blockquote style="font-family: 'Fraunces', serif; font-size: 26px; font-style: italic; line-height: 1.35; color: var(--ink); margin: 0;">
+        &ldquo;We'll soon view coding the way we view using spreadsheets today: a commonplace skill every white-collar worker is expected to have.&rdquo;
+      </blockquote>
+      <p style="margin-top: 14px; font-size: 16px; color: var(--muted); font-style: italic;">Andrew Chen · General Partner, a16z · LinkedIn, April 2026</p>
+      <div style="margin-top: 28px; padding: 18px 24px; background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0;">
+        <p style="font-size: 20px; color: var(--ink); margin: 0;"><strong>His timeline: under 18 months.</strong> Every job description.</p>
+      </div>
+      <p style="margin-top: 28px; font-size: 22px; color: var(--ink-soft); line-height: 1.4;">You're not learning something exotic.<br/>You're learning the next Excel.</p>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">10</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11 · Demo 2 · PPT -->
+<!-- ============================================================ -->
+<section class="slide">
+  <div class="demo-frame">
+    <div class="demo-num">Live Demo · 2 of 3</div>
+    <div class="demo-title">Prompt → Presentation.</div>
+    <p class="demo-pain"><strong style="color: var(--ink);">The setup:</strong> You have 60 minutes before a pitch. You need a 10-slide deck. Your normal loop (research, decide, design, build) eats three hours.</p>
+    <p class="demo-pain" style="margin-top: 18px;"><strong style="color: var(--accent);">Watch this:</strong> I take a topic from this room. Claude produces a real PPTX. Cover, sections, charts, conclusions. Opens in PowerPoint in under two minutes.</p>
+    <div class="watch-row">
+      <div class="watch-card">
+        <div class="n">01</div>
+        <div class="t">A skill someone else built</div>
+        <div class="d">The pptx skill. Loaded automatically the moment Claude sees "deck."</div>
+      </div>
+      <div class="watch-card">
+        <div class="n">02</div>
+        <div class="t">Content plus design, together</div>
+        <div class="d">Decides what goes where, in what order, with which chart type.</div>
+      </div>
+      <div class="watch-card">
+        <div class="n">03</div>
+        <div class="t">A real .pptx, not a preview</div>
+        <div class="d">Opens in PowerPoint or Keynote. Edit, send, done.</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">11</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12 · Demo 3 · GTM (dark variant) -->
+<!-- ============================================================ -->
+<section class="slide dark">
+  <div class="demo-frame">
+    <div class="demo-num">Live Demo · 3 of 3</div>
+    <div class="demo-title">GTM Skill.</div>
+    <p class="demo-pain"><strong style="color: var(--bg);">The setup:</strong> I run a startup. Sales is half my job. Finding the right person at the right company, researching them, drafting a personalized note that doesn't sound like spam. It used to take 30 minutes per prospect.</p>
+    <p class="demo-pain" style="margin-top: 18px;"><strong style="color: var(--code-accent);">Watch this:</strong> One command. I describe my ideal customer. The skill finds three real people, researches each, drafts a personalized email plus LinkedIn note, logs to my CRM. End to end.</p>
+    <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 13px;">
+      <div style="padding: 12px 10px; background: rgba(204,120,92,0.15); border-radius: 6px; color: var(--code-accent); text-align: center;">Apollo MCP<br/><span style="color: rgba(245,244,238,0.55); font-size: 11px;">find people</span></div>
+      <div style="padding: 12px 10px; background: rgba(204,120,92,0.15); border-radius: 6px; color: var(--code-accent); text-align: center;">Web search<br/><span style="color: rgba(245,244,238,0.55); font-size: 11px;">research</span></div>
+      <div style="padding: 12px 10px; background: rgba(204,120,92,0.15); border-radius: 6px; color: var(--code-accent); text-align: center;">Memory<br/><span style="color: rgba(245,244,238,0.55); font-size: 11px;">my voice</span></div>
+      <div style="padding: 12px 10px; background: rgba(204,120,92,0.15); border-radius: 6px; color: var(--code-accent); text-align: center;">Files<br/><span style="color: rgba(245,244,238,0.55); font-size: 11px;">drafts</span></div>
+      <div style="padding: 12px 10px; background: rgba(204,120,92,0.15); border-radius: 6px; color: var(--code-accent); text-align: center;">Spreadsheet<br/><span style="color: rgba(245,244,238,0.55); font-size: 11px;">CRM</span></div>
+      <div style="padding: 12px 10px; background: rgba(204,120,92,0.15); border-radius: 6px; color: var(--code-accent); text-align: center;">Browser<br/><span style="color: rgba(245,244,238,0.55); font-size: 11px;">draft emails</span></div>
+    </div>
+    <p style="margin-top: 20px; font-size: 16px; color: rgba(245,244,238,0.6); font-style: italic;">Six tools, one skill, one command. Each arrow in the pipeline is a Claude decision, not a human step.</p>
+    <p style="margin-top: 24px; padding: 14px 20px; background: rgba(138,106,30,0.18); border-left: 3px solid var(--warn); border-radius: 0 8px 8px 0; font-size: 16px; color: rgba(245,244,238,0.88);">
+      <strong style="color: var(--warn-soft);">Disclosure:</strong> running this today against a market we don't sell into. Real people, real public data, but no one I'd ever pitch. Real outreach gets human review before any send. Always.
+    </p>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">12</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13 · Three jobs done -->
+<!-- ============================================================ -->
+<section class="slide center">
+  <div style="max-width: 1100px;">
+    <span class="badge">Pause</span>
+    <h1 style="font-size: 76px;">Three demos. Three jobs done.</h1>
+    <p style="font-size: 28px; color: var(--ink-soft); line-height: 1.5; margin-top: 12px;">Lawyer work. Slide work. Salesperson work.</p>
+    <p style="font-size: 28px; color: var(--ink-soft); line-height: 1.5;">Each skill: under 100 lines of markdown.</p>
+    <p style="font-size: 28px; color: var(--ink-soft); line-height: 1.5;">Each one: built once, runs forever.</p>
+    <p style="font-size: 34px; font-weight: 600; color: var(--accent); margin-top: 44px;">Now imagine thirty of these. For everything you do twice.</p>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">13</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14 · Rate limits -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge" style="background: var(--warn-soft); color: var(--warn);">Read This Before You Build</span>
+  <h1>Power comes with rate limits.</h1>
+  <p>Quick show of hands: who's been rate-limited or flagged by LinkedIn, Gmail, or a CRM? Automation amplifies. Cross a ceiling and you get flagged, suspended, or banned. Permanently.</p>
+  <div style="margin-top: 12px;">
+    <table>
+      <thead><tr><th>Channel</th><th>Daily limit</th><th>If you exceed</th></tr></thead>
+      <tbody>
+        <tr><td><strong>LinkedIn connection requests</strong></td><td>20–25</td><td>Restriction, then permanent ban</td></tr>
+        <tr><td><strong>LinkedIn messages (1st degree)</strong></td><td>50</td><td>Soft flag, reduced reach</td></tr>
+        <tr><td><strong>Cold email (warmed inbox)</strong></td><td>50</td><td>Spam folder, sender reputation hit</td></tr>
+        <tr><td><strong>Cold email (new inbox)</strong></td><td>Start at 10, ramp over 4 weeks</td><td>Domain blacklist</td></tr>
+        <tr><td><strong>Auto-apply</strong></td><td>5–10 roles you actually want</td><td>Recruiter blacklist (spray equals death)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout warn" style="margin-top: 16px;">
+    <strong>Three rules. Always.</strong><br/>
+    1. Never auto-send to a real human without human review.<br/>
+    2. Respect captchas. They exist for a reason.<br/>
+    3. The skill is your assistant, not your replacement.
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">14</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 15 · Build intro -->
+<!-- ============================================================ -->
+<section class="slide center">
+  <div style="max-width: 1050px;">
+    <span class="badge">Your Turn · Build</span>
+    <h1 style="font-size: 92px; margin-bottom: 20px;">Job Hunt Copilot.</h1>
+    <p style="font-size: 28px; color: var(--ink-soft); line-height: 1.4; margin-bottom: 36px;">Paste any job URL. Get a tailored resume, personalized cold email,<br/>LinkedIn note, hiring manager research, tracker entry.</p>
+    <div class="grid-2" style="gap: 32px; margin-top: 24px;">
+      <div class="card" style="text-align: left;">
+        <div class="card-title">Everyone builds this</div>
+        <div class="card-body">Works on LinkedIn, Lever, Greenhouse, Workday, any career page. Useful this week if you're job-hunting, useful three years from now when you're not.</div>
+      </div>
+      <div class="card tinted" style="text-align: left;">
+        <div class="card-title">Finished early? Card 8.</div>
+        <div class="card-body">Build <strong>Meeting Prep Copilot</strong> in a single paste. Same architecture, different domain. Proves the pattern generalizes.</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">15</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 16 · What you'll have -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">Build · The Outcome</span>
+  <h1>On your laptop, 30 minutes from now</h1>
+  <div class="grid-2" style="margin-top: 24px; gap: 36px;">
+    <div>
+      <h3 style="margin-top: 0;">The skill + memory</h3>
+      <pre style="font-size: 14px;"><span class="c"># The skill itself</span>
+~/.claude/skills/job-hunt-copilot/
+└── SKILL.md
+
+<span class="c"># Your saved preferences</span>
+~/.claude/projects/.../memory/
+├── job-hunt-resume.md
+└── job-hunt-tone.md</pre>
+    </div>
+    <div>
+      <h3 style="margin-top: 0;">Per-job outputs</h3>
+      <pre style="font-size: 13px;"><span class="c"># For every job you run the skill on:</span>
+~/claude-outputs/job-hunt/
+├── tracker.xlsx
+└── {company}-{date}/
+    ├── job-description.md
+    ├── tailored-resume.md
+    ├── cold-email-draft.md
+    ├── linkedin-note-draft.md
+    └── hiring-manager-research.md</pre>
+    </div>
+  </div>
+  <p class="callout" style="margin-top: 20px;"><strong>Everything is a file.</strong> Edit, share, version-control, attach to applications.</p>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">16</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 17 · Setup + Cards 1-3 -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">Build · Start Here</span>
+  <h2>Setup, then Cards 1 to 3.</h2>
+  <div style="margin-top: 20px; display: grid; grid-template-columns: 260px 1fr; gap: 36px;">
+    <div>
+      <h3 style="margin-top: 0; font-size: 20px;">60-second setup</h3>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="t" style="font-size: 16px;">Terminal: <code class="inline" style="font-size: 15px;">claude</code></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="t" style="font-size: 16px;">Open prompt cards</div>
+          <div class="d" style="font-size: 14px;"><a href="cards.html" target="_blank" style="color: var(--accent); font-weight: 600; text-decoration: underline;">cards.html</a> in a new tab</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="t" style="font-size: 16px;">Job URL ready</div>
+          <div class="d" style="font-size: 14px;">Any real job.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="margin-top: 0; font-size: 20px;">Cards 1 to 3</h3>
+      <div class="grid-3" style="gap: 14px;">
+        <div class="card" style="padding: 18px;">
+          <div class="card-title" style="font-size: 15px;">Card 1 · Create</div>
+          <div class="card-body" style="font-size: 14px;">Paste. Claude writes SKILL.md. Read it. That file IS your skill.</div>
+        </div>
+        <div class="card" style="padding: 18px;">
+          <div class="card-title" style="font-size: 15px;">Card 2 · Memory</div>
+          <div class="card-body" style="font-size: 14px;">Teach it your resume. Ask once. Save. Never re-ask.</div>
+        </div>
+        <div class="card" style="padding: 18px;">
+          <div class="card-title" style="font-size: 15px;">Card 3 · Run</div>
+          <div class="card-body" style="font-size: 14px;">Paste a real job URL. Watch the pipeline run. 90s to 3min.</div>
+        </div>
+      </div>
+      <pre style="margin-top: 18px; font-size: 13px;"><span class="c"># Card 3 (preview)</span>
+Use the job-hunt-copilot skill on this job:
+
+<span class="s">https://[paste any real job URL here]</span></pre>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">17</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 18 · Cards 4-5 -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">Build · Cards 4 and 5</span>
+  <h2>Refine, then verify.</h2>
+  <div class="grid-2" style="gap: 32px; margin-top: 12px;">
+    <div class="card">
+      <div class="card-title">Card 4 · Refine</div>
+      <div class="card-body">Lock in your voice. Save tone preferences so every future run follows them. <strong>This is the moment skills compound.</strong> After 5 jobs, drafts feel like they came from your hand.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Card 5 · Verify</div>
+      <div class="card-body">Have Claude show you everything it created. SKILL.md path, saved resume, saved preferences, each output folder, the tracker xlsx. <strong>If you see all of it, you've built a working skill.</strong></div>
+    </div>
+  </div>
+  <p class="callout" style="margin-top: 24px;">Tomorrow, on the next job you find, you only paste Card 3 with a new URL. The skill does the rest.</p>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">18</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 19 · The reveal -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">The Reveal</span>
+  <h1>What you just built is v1.</h1>
+  <h1 style="color: var(--accent);">Here's v3.</h1>
+  <p>Same skill. Another evening of work. Now it does this:</p>
+  <div class="grid-2" style="margin-top: 16px; gap: 24px;">
+    <div class="card tinted">
+      <div class="card-title">+ Browser auto-fill</div>
+      <div class="card-body">For Lever and Greenhouse, opens the apply page in a browser, pre-fills name, email, resume. You review, you click submit.</div>
+    </div>
+    <div class="card tinted">
+      <div class="card-title">+ Multi-job batch mode</div>
+      <div class="card-body">Paste 10 URLs. The skill fans out via sub-agents, processes all 10 in parallel, returns one consolidated tracker.</div>
+    </div>
+    <div class="card tinted">
+      <div class="card-title">+ Follow-up scheduler</div>
+      <div class="card-body">Logs every outreach. Reminds you to follow up at day 5 and day 12. Drafts the follow-up notes when the time comes.</div>
+    </div>
+    <div class="card tinted">
+      <div class="card-title">+ Calendar integration</div>
+      <div class="card-body">When a recruiter replies with interview slots, parses the email, checks your calendar via MCP, drafts a reply with your availability.</div>
+    </div>
+  </div>
+  <p class="callout" style="margin-top: 20px;"><strong>None of this is hard.</strong> Same pattern, applied four more times. Do it this weekend.</p>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">19</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 20 · Best practices (trimmed to 4 + warn) -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">Best Practices</span>
+  <h1>Four things I've learned the hard way</h1>
+  <div class="grid-2" style="margin-top: 20px; gap: 22px;">
+    <div class="card">
+      <div class="card-title">1. Always review before sending.</div>
+      <div class="card-body">Drafts to file. Human eyes before any human reads it. Skills produce drafts, never auto-send.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">2. Save preferences as you discover them.</div>
+      <div class="card-body">When Claude does something you want every time, say so. The memory file is your training data.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">3. Think like your agent.</div>
+      <div class="card-body">When it misfires, ask: what did Claude actually see in its context? Its mistakes make sense from inside.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">4. Outputs are files. Always.</div>
+      <div class="card-body">Don't let work disappear into chat history. Every skill saves a deliverable to disk. Searchable, shareable, attachable.</div>
+    </div>
+  </div>
+  <div class="card warn" style="margin-top: 20px;">
+    <div class="card-title" style="color: var(--warn);">The one rule above all rules</div>
+    <div class="card-body">Never store secrets (API keys, passwords, financial credentials) in skill files, memory files, or anything that could end up on someone else's screen.</div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">20</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 21 · What to build next -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">What's Next</span>
+  <h1>Five skills to build this weekend</h1>
+  <div class="grid-3" style="margin-top: 20px; gap: 18px;">
+    <div class="card">
+      <div class="card-title">Meeting Prep Copilot</div>
+      <div class="card-body">Paste a calendar invite. Get a 1-page brief on attendees, their company, recent news, smart questions to ask.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Case Study Analyzer</div>
+      <div class="card-body">Drop a case PDF. Get an exec summary, the frameworks applied, and the five cold-call questions most likely to come up.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Personal CRM</div>
+      <div class="card-body">Every person you meet, with notes, last contact, reminders to follow up. Searchable. Yours forever.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Industry Tracker</div>
+      <div class="card-body">"What happened in [industry] this week?" A cited roundup with sources. Run weekly via a hook.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Coffee Chat Follow-up</div>
+      <div class="card-body">Met someone at a networking event? One command. Personalized thank-you, LinkedIn note, CRM entry.</div>
+    </div>
+    <div class="card dark">
+      <div class="card-title" style="color: white;">The pattern</div>
+      <div class="card-body">Notice yourself doing the same thing twice. Describe it in plain English. Make it a skill. Refine over a week. Done.</div>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">21</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 22 · Resources -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">Resources</span>
+  <h1>Where to keep learning</h1>
+  <div class="grid-2" style="margin-top: 20px; gap: 28px;">
+    <div>
+      <h3 style="margin-top: 0;">Official</h3>
+      <ul>
+        <li><strong>claude.ai/code</strong>. Install Claude Code.</li>
+        <li><strong>docs.claude.com</strong>. All the documentation.</li>
+        <li><strong>anthropic.com/engineering/building-effective-agents</strong></li>
+        <li><strong>anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills</strong></li>
+      </ul>
+      <h3 style="margin-top: 24px;">Today's materials</h3>
+      <p style="font-size: 20px; margin: 0 0 6px;">Everything we used today:</p>
+      <p style="font-size: 26px; font-weight: 700; color: var(--accent); margin: 0 0 6px; font-family: 'JetBrains Mono', monospace;">sharan0516.github.io/asb-workshop</p>
+      <p class="small">Password: <code class="inline">ASB2026</code></p>
+    </div>
+    <div class="card dark">
+      <h3 style="color: white;">My ask</h3>
+      <p>If you build something cool with this, a skill that saves you hours every week, <strong style="color: white;">tell me about it.</strong></p>
+      <p>Email me what you built and I'll send you back a critique plus ideas to extend it.</p>
+      <p style="margin-top: 24px;"><strong style="color: white;">careers@lumif.ai</strong></p>
+      <p class="small" style="color: rgba(255,255,255,0.6);">(Yes, that's the real address. Yes, I read every reply.)</p>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">22</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 23 · Q&A -->
+<!-- ============================================================ -->
+<section class="slide center">
+  <div style="max-width: 900px;">
+    <h1 style="font-size: 128px; line-height: 0.95; margin-bottom: 32px;">Questions?</h1>
+    <p style="font-size: 28px; color: var(--ink-soft); line-height: 1.4;">Then go build something for the boring task you did this week.</p>
+    <p style="font-size: 24px; color: var(--muted); margin-top: 64px;">Thank you, ASB.</p>
+    <p style="font-size: 18px; color: var(--muted); margin-top: 8px;">Sharan JM · ASB '18 · Kuala Lumpur · April 2026</p>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">23</span></div>
+</section>
+
+</div>
+
+<div class="nav-hint">← → · Space · F (fullscreen) · P (print)</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    slides[current].classList.add('active');
+    if (history.replaceState) history.replaceState(null, '', '#' + (current + 1));
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); show(current + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(current - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); show(0); }
+    else if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+    else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); document.documentElement.requestFullscreen?.(); }
+    else if (e.key === 'p' || e.key === 'P') { e.preventDefault(); window.print(); }
+  });
+  document.addEventListener('click', e => {
+    if (e.target.closest('a, button, input, textarea, pre, img, iframe')) return;
+    const w = window.innerWidth;
+    show(e.clientX > w / 2 ? current + 1 : current - 1);
+  });
+  const h = parseInt(location.hash.replace('#', ''), 10);
+  if (!isNaN(h) && h >= 1 && h <= slides.length) show(h - 1);
+</script>
+</body>
+</html>

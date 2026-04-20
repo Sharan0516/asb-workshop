@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ASB Workshop · Claude Code for Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F4EE;
+    --bg-tint: #EBE7DC;
+    --ink: #141413;
+    --ink-soft: #2A2825;
+    --muted: #6B675F;
+    --line: #D9D5CA;
+    --accent: #CC785C;
+    --accent-soft: #F1E4DD;
+    --warn: #8A6A1E;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  .wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+  }
+  .panel {
+    max-width: 640px;
+    width: 100%;
+  }
+  .pre {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: 64px; font-weight: 800;
+    line-height: 0.98; letter-spacing: -0.03em;
+    margin: 0 0 20px;
+  }
+  .subtitle {
+    font-size: 22px; color: var(--ink-soft);
+    line-height: 1.4;
+    margin: 0 0 8px;
+  }
+  .kicker {
+    font-size: 17px; color: var(--muted);
+    margin: 0 0 40px;
+  }
+  .form-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  input[type="password"] {
+    flex: 1;
+    padding: 14px 18px;
+    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    outline: none;
+  }
+  input[type="password"]:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  button {
+    padding: 14px 28px;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    background: var(--ink);
+    color: var(--bg);
+    border: 1px solid var(--ink);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  button:hover { background: #2A2825; }
+  .err {
+    font-size: 14px;
+    color: var(--warn);
+    margin: 0 0 24px;
+    font-weight: 500;
+  }
+  .err.hidden { display: none; }
+  .hint {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* content panel after auth */
+  .content.hidden { display: none; }
+  .content h1 { font-size: 56px; margin-bottom: 12px; }
+  .content .subtitle { margin-bottom: 40px; }
+  .link-card {
+    display: block;
+    text-decoration: none;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 14px;
+    transition: all 0.15s;
+  }
+  .link-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  }
+  .link-card .card-label {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .link-card .card-title {
+    font-size: 24px; font-weight: 700; color: var(--ink);
+    margin: 0 0 6px;
+  }
+  .link-card .card-desc {
+    font-size: 15px; color: var(--muted);
+    margin: 0;
+  }
+  .content .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .content .footer strong { color: var(--ink); }
+  .content .footer a { color: var(--accent); text-decoration: none; }
+
+  .gate.hidden { display: none; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 44px; }
+    .form-row { flex-direction: column; }
+    button { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="panel">
+
+    <!-- Password gate -->
+    <div id="gate" class="gate">
+      <div class="pre">Asia School of Business · Workshop</div>
+      <h1>Claude Code<br/>for Business.</h1>
+      <p class="subtitle">Build the tools your work needs.</p>
+      <p class="kicker">Enter the workshop password to access the deck and prompt cards.</p>
+      <div class="form-row">
+        <input type="password" id="pw" placeholder="Workshop password" autofocus />
+        <button id="enter-btn">Enter</button>
+      </div>
+      <p id="err" class="err hidden">That's not the right password. Try again.</p>
+      <p class="hint">Sharan will share the password at the start of the session.</p>
+    </div>
+
+    <!-- Post-auth content -->
+    <div id="content" class="content hidden">
+      <div class="pre">You're in · Welcome</div>
+      <h1>Pick your materials.</h1>
+      <p class="subtitle">Two files. Keep both open during the workshop.</p>
+
+      <a href="deck.html" class="link-card" target="_blank">
+        <div class="card-label">Slide Deck</div>
+        <div class="card-title">The workshop deck</div>
+        <p class="card-desc">23 slides. Follows the flow of Sharan's presentation. Press <code>F</code> for fullscreen, arrow keys to navigate.</p>
+      </a>
+
+      <a href="cards.html" class="link-card" target="_blank">
+        <div class="card-label">Prompt Cards</div>
+        <div class="card-title">The build-along cards</div>
+        <p class="card-desc">Nine copy-paste prompts. Cards 0 to 5 build Job Hunt Copilot. Cards 6 to 8 are bonuses for fast finishers, including Meeting Prep Copilot.</p>
+      </a>
+
+      <div class="footer">
+        <p>Built by <strong>Sharan JM</strong> · ASB Class of 2018 · Now co-founder &amp; CPO at <a href="https://lumif.ai" target="_blank">Lumif.ai</a></p>
+        <p>Questions or built something cool? <strong>careers@lumif.ai</strong></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const PASSWORD = 'ASB2026';
+  const gate = document.getElementById('gate');
+  const content = document.getElementById('content');
+  const pwInput = document.getElementById('pw');
+  const err = document.getElementById('err');
+  const enterBtn = document.getElementById('enter-btn');
+
+  function grant() {
+    sessionStorage.setItem('asb-access', 'granted');
+    gate.classList.add('hidden');
+    content.classList.remove('hidden');
+  }
+
+  function check() {
+    const val = pwInput.value.trim();
+    if (val === PASSWORD) {
+      grant();
+    } else {
+      err.classList.remove('hidden');
+      pwInput.value = '';
+      pwInput.focus();
+    }
+  }
+
+  enterBtn.addEventListener('click', check);
+  pwInput.addEventListener('keypress', e => {
+    if (e.key === 'Enter') { e.preventDefault(); check(); }
+  });
+  pwInput.addEventListener('input', () => err.classList.add('hidden'));
+
+  // persist across reloads in same session
+  if (sessionStorage.getItem('asb-access') === 'granted') {
+    grant();
+  }
+</script>
+
+</body>
+</html>
