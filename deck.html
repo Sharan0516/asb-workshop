@@ -431,7 +431,7 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
 <!-- ============================================================ -->
 <section class="slide">
   <span class="badge">Before We Start</span>
-  <h1>I sat in these seats. Class of 2018.</h1>
+  <h1>ASB Class of 2018. Inaugural class.</h1>
   <div class="grid-2" style="gap: 44px; margin-top: 20px; align-items: flex-start;">
     <div>
       <div class="bio-row">
@@ -479,25 +479,35 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
   <div class="demo-frame">
     <div class="demo-num">Live Demo · 1 of 3</div>
     <div class="demo-title">Legal Reviewer.</div>
-    <p class="demo-pain"><strong style="color: var(--ink);">The setup:</strong> Every professional deals with contracts. NDAs, vendor MSAs, offer letters, service agreements. Most don't read them carefully. Few can tell what's standard from what's a trap.</p>
-    <p class="demo-pain" style="margin-top: 18px;"><strong style="color: var(--accent);">Watch this:</strong> Drop a contract PDF in. Get back a one-page brief. What's standard, what's risky, suggested redlines, questions to raise.</p>
-    <div class="watch-row">
+    <p class="demo-pain"><strong style="color: var(--ink);">The setup:</strong> A $400/hour lawyer catches things you miss. Most people sign without one. This skill does what a senior startup lawyer does — in under three minutes, for any contract you drop in.</p>
+    <div class="watch-row" style="grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 20px;">
       <div class="watch-card">
         <div class="n">01</div>
-        <div class="t">No upload, no web tool</div>
-        <div class="d">Claude reads the PDF where it lives on my disk. No web UI, no cloud storage. Content goes to Anthropic's API for inference, then gone.</div>
+        <div class="t">Founder-first, not neutral</div>
+        <div class="d">Persona is a senior startup lawyer on <em>your</em> side. Flags power imbalances a neutral review would call "standard."</div>
       </div>
       <div class="watch-card">
         <div class="n">02</div>
-        <div class="t">It knows I'm a buyer, not a vendor</div>
-        <div class="d">Memory stored once, applied forever. Weighs the analysis toward my side of the table.</div>
+        <div class="t">Web-grounded ratings</div>
+        <div class="d">Every risk rating is backed by a live search for market standards. "Aggressive" means compared to something real — not a gut feel.</div>
       </div>
       <div class="watch-card">
         <div class="n">03</div>
-        <div class="t">Output is a file, not chat</div>
-        <div class="d">Markdown brief I can attach to an email, share with my lawyer, search later.</div>
+        <div class="t">Adversarial self-check</div>
+        <div class="d">After the first pass, it switches roles and attacks its own analysis. Revises over-flags, catches missed risks. Then finalises.</div>
+      </div>
+      <div class="watch-card">
+        <div class="n">04</div>
+        <div class="t">Redline-ready language</div>
+        <div class="d">Every flag comes with exact replacement clause text. Founder copies it straight into a tracked-changes document.</div>
+      </div>
+      <div class="watch-card">
+        <div class="n">05</div>
+        <div class="t">Three outputs</div>
+        <div class="d">HTML report. Markdown brief. Inline Word comments on the original .docx — open it in Google Docs and every risk is pinned to the clause.</div>
       </div>
     </div>
+    <p style="margin-top: 16px; font-size: 14px; color: var(--muted); font-style: italic;">All of the above is configured in a single markdown file. Change the persona, add a section, adjust the tone — one edit, takes thirty seconds.</p>
   </div>
   <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">3</span></div>
 </section>
@@ -543,7 +553,7 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
     <div class="timeline-year hl">2026</div>
     <div class="timeline-what"><strong>Skills.</strong> <span class="detail">Anyone who can write a paragraph can teach an agent a job. That's today.</span></div>
   </div>
-  <p class="callout" style="margin-top: 36px;">You're not early to AI. <strong>You're early to using it properly.</strong></p>
+  <p class="callout" style="margin-top: 36px;">Most people are still asking it questions. <strong>You're here to make it do the work.</strong></p>
   <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">5</span></div>
 </section>
 
@@ -572,7 +582,7 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
     <div class="ladder-num">3</div>
     <div class="ladder-name">Agent</div>
     <div class="ladder-flow">[plan → act → observe] repeat until done</div>
-    <div class="ladder-ex">Claude Code.</div>
+    <div class="ladder-ex">Claude acting with tools.</div>
 
     <div class="ladder-sep"></div>
 
@@ -581,7 +591,24 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
     <div class="ladder-flow">[expertise file] + agent → specialist</div>
     <div class="ladder-ex">The Matrix kung-fu file.</div>
   </div>
-  <p class="callout" style="margin-top: 28px;">"Agents are models using tools in a loop."<span class="attr">Barry Zhang, Anthropic</span></p>
+  <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 28px;">
+    <div style="background: var(--accent-soft); border-radius: 10px; padding: 16px 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 6px;">AGENT</div>
+      <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">The chef.</div>
+      <div style="font-size: 13px; color: var(--ink-soft);">Plan → act → observe, in a loop. Turns a skill into real work.</div>
+    </div>
+    <div style="background: var(--accent-soft); border-radius: 10px; padding: 16px 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 6px;">SKILL</div>
+      <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">The recipe.</div>
+      <div style="font-size: 13px; color: var(--ink-soft);">A markdown file that turns a generalist agent into a specialist.</div>
+    </div>
+    <div style="background: var(--accent-soft); border-radius: 10px; padding: 16px 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 6px;">CLAUDE CODE</div>
+      <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">The kitchen.</div>
+      <div style="font-size: 13px; color: var(--ink-soft);">The environment where agent and skill meet. Tools, memory, hooks, files.</div>
+    </div>
+  </div>
+  <p style="margin-top: 14px; font-size: 13px; color: var(--muted); font-style: italic; text-align: center;">"Agents are models using tools in a loop." — Barry Zhang, Anthropic</p>
   <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">6</span></div>
 </section>
 
@@ -692,16 +719,17 @@ Flag anything I'd regret signing.</pre>
   <h2>Two ways to think about it.</h2>
   <div class="grid-2" style="gap: 44px; align-items: flex-start;">
     <div>
-      <div class="video-wrap">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/0YhJxJZOWBw"
-          title="The Matrix: I Know Kung Fu"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
+      <a href="https://www.youtube.com/watch?v=w_8NsPQBdV0" target="_blank" class="video-wrap" style="display:block;position:relative;text-decoration:none;">
+        <img src="https://img.youtube.com/vi/w_8NsPQBdV0/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:10px;" alt="The Matrix: I Know Kung Fu" />
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);border-radius:10px;">
+          <div style="width:64px;height:64px;background:rgba(255,255,255,0.92);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <div style="width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:20px solid #141413;margin-left:4px;"></div>
+          </div>
+        </div>
+      </a>
       <div class="matrix-quote">
         Kung fu takes years.<br/>
-        Neo loads a file.<br/>
+        Tank loads a file into Neo.<br/>
         He opens his eyes: <em>&ldquo;I know kung fu.&rdquo;</em>
       </div>
       <p class="tiny" style="font-style: italic;">The Matrix (1999), Warner Bros. · used for illustration.</p>
@@ -748,29 +776,29 @@ Flag anything I'd regret signing.</pre>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 12 · Demo 2 · PPT -->
+<!-- SLIDE 12 · Demo 2 · Pricing (cold open) -->
 <!-- ============================================================ -->
 <section class="slide">
   <div class="demo-frame">
     <div class="demo-num">Live Demo · 2 of 3</div>
-    <div class="demo-title">Prompt → Presentation.</div>
-    <p class="demo-pain"><strong style="color: var(--ink);">The setup:</strong> You have 60 minutes before a pitch. You need a 10-slide deck. Your normal loop (research, decide, design, build) eats three hours.</p>
-    <p class="demo-pain" style="margin-top: 18px;"><strong style="color: var(--accent);">Watch this:</strong> I take a topic from this room. Claude produces a real PPTX. Cover, sections, charts, conclusions. Opens in PowerPoint within minutes.</p>
+    <div class="demo-title">Prompt → Pricing Strategy.</div>
+    <p class="demo-pain"><strong style="color: var(--ink);">The setup:</strong> You're pricing a new enterprise deal. How much? What structure? Hybrid, per-seat, per-contract? Every question is a rabbit hole. Normally: a week of founder-time, a gut-feel answer, a discount handed out in the final hour.</p>
+    <p class="demo-pain" style="margin-top: 18px;"><strong style="color: var(--accent);">Watch this:</strong> I hand Claude a product and a buyer. It runs the math, benchmarks six competitors, and deliberates with a 13-member pricing advisory board. Out comes a source-attributed strategy with confidence tiers on every number.</p>
     <div class="watch-row">
       <div class="watch-card">
         <div class="n">01</div>
-        <div class="t">A skill someone else built</div>
-        <div class="d">The pptx skill. Loaded automatically the moment Claude sees "deck."</div>
+        <div class="t">Not a vibe-based answer</div>
+        <div class="d">Every number sourced. Every assumption surfaced. EVC, WTP, competitor bands — computed, not guessed.</div>
       </div>
       <div class="watch-card">
         <div class="n">02</div>
-        <div class="t">Content plus design, together</div>
-        <div class="d">Decides what goes where, in what order, with which chart type.</div>
+        <div class="t">A 13-member advisory board</div>
+        <div class="d">Tucker, Ramanujam, Ariely, Roberge and 9 more. Frameworks deliberate. Tensions surface. You decide.</div>
       </div>
       <div class="watch-card">
         <div class="n">03</div>
-        <div class="t">A real .pptx, not a preview</div>
-        <div class="d">Opens in PowerPoint or Keynote. Edit, send, done.</div>
+        <div class="t">A reasoning-first workbench</div>
+        <div class="d">Interactive HTML with sliders. Re-run assumptions live in the sales call. Not a static PDF.</div>
       </div>
     </div>
   </div>
@@ -778,7 +806,159 @@ Flag anything I'd regret signing.</pre>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 13 · Demo 3 · GTM (dark variant) -->
+<!-- SLIDE 13 · Pricing skill · Advisory Board -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">Inside the Skill</span>
+  <h2>A 13-member pricing advisory board.</h2>
+  <p style="margin-top: -14px; margin-bottom: 24px; font-size: 19px; color: var(--muted);">Every world-class pricing idea — captured as a framework, not a persona. The board debates. You decide.</p>
+  <div class="grid-2" style="gap: 40px; align-items: flex-start;">
+    <div>
+      <h3 style="margin-bottom: 14px;">How it works</h3>
+      <div class="anatomy-row">
+        <div class="anatomy-k">Frameworks, not personas</div>
+        <div class="anatomy-v">"Tucker's EVC formula suggests…" — never "Catherine says." No roleplay. Their published work, made executable.</div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-k">Phase-activated</div>
+        <div class="anatomy-v">Tucker on value quantification. Raju on competitive response. Roberge on deal governance. The right voices at the right step.</div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-k">Tensions are the product</div>
+        <div class="anatomy-v">Ramanujam vs Ghuman on where to start. Ariely vs Lehrskov-Schmidt on buyer rationality. Conflict surfaces the decision.</div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-k">The founder decides</div>
+        <div class="anatomy-v">Consensus can be overridden. Every override captured with reasoning. The board informs; you choose.</div>
+      </div>
+    </div>
+    <div>
+      <h3 style="margin-bottom: 14px;">The roster</h3>
+      <table style="font-size: 15px;">
+        <thead><tr><th>#</th><th>Advisor</th><th>Lens</th></tr></thead>
+        <tbody>
+          <tr><td>01</td><td><strong>Catherine Tucker</strong></td><td>EVC · value quantification</td></tr>
+          <tr><td>02</td><td><strong>Marco Bertini</strong></td><td>Outcome-based pricing</td></tr>
+          <tr><td>03</td><td><strong>Madhavan Ramanujam</strong></td><td>WTP research · packaging</td></tr>
+          <tr><td>04</td><td><strong>Negin Golrezaei</strong></td><td>Algorithmic pricing (bandits)</td></tr>
+          <tr><td>05</td><td><strong>Ulrik Lehrskov-Schmidt</strong></td><td>B2B structure design</td></tr>
+          <tr><td>06</td><td><strong>Z. John Zhang</strong></td><td>Price wars · channel</td></tr>
+          <tr><td>07</td><td><strong>Jagmohan Raju</strong></td><td>Competitive response</td></tr>
+          <tr><td>08</td><td><strong>Alessandro Bonatti</strong></td><td>Game theory · info design</td></tr>
+          <tr><td>09</td><td><strong>Kyle Poyar</strong></td><td>PLG · usage-based ops</td></tr>
+          <tr><td>10</td><td><strong>Ken Moon</strong></td><td>Experimentation · simplicity</td></tr>
+          <tr><td>11</td><td><strong>Ajit Ghuman</strong></td><td>SaaS packaging architecture</td></tr>
+          <tr><td>12</td><td><strong>Dan Ariely</strong></td><td>Behavioral pricing</td></tr>
+          <tr><td>13</td><td><strong>Mark Roberge</strong></td><td>Enterprise sales reality</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">13</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14 · Pricing skill · Anatomy -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">Anatomy</span>
+  <h2>What's in the skill folder.</h2>
+  <p style="margin-top: -14px; margin-bottom: 22px; font-size: 19px; color: var(--muted);">One SKILL.md, 13 advisor files, 6 reference methodologies, 3 templates. Markdown all the way down.</p>
+  <div class="grid-2" style="gap: 36px; align-items: flex-start;">
+    <pre style="margin-top: 0;"><span class="c"># The pricing skill on disk</span>
+
+~/.claude/skills/pricing/
+├── <span class="k">SKILL.md</span>                      <span class="c"># 1,926 lines · 8 phases · 7 modes</span>
+├── advisors/
+│   ├── <span class="k">INDEX.md</span>                  <span class="c"># roster + phase routing</span>
+│   ├── catherine-tucker.md
+│   ├── madhavan-ramanujam.md
+│   ├── dan-ariely.md
+│   └── <span class="c"># …10 more advisor files</span>
+├── references/
+│   ├── pricing-methodologies.md   <span class="c"># 14 formulas</span>
+│   ├── ai-native-pricing.md
+│   ├── methodology-decision-tree.md
+│   ├── competitor-analysis-framework.md
+│   ├── behavioral-pricing-patterns.md
+│   └── partnership-pricing.md
+└── templates/
+    ├── <span class="k">PRICING-STRATEGY.md</span>        <span class="c"># the shape of the output</span>
+    ├── COMPETITOR-INTEL.md
+    └── VALUE-MAP.md</pre>
+    <div>
+      <h3 style="margin-top: 0;">Four layers.</h3>
+      <div class="anatomy-row">
+        <div class="anatomy-k">SKILL.md</div>
+        <div class="anatomy-v">The recipe. Phases, modes, deliberation protocol, output rules. Read top to bottom and you know how the skill thinks.</div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-k">advisors/</div>
+        <div class="anatomy-v">13 expert files. Each captures frameworks and heuristics for one pricing voice. Loaded on demand by phase.</div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-k">references/</div>
+        <div class="anatomy-v">Formulas and decision trees. EVC, WTP protocols, competitive analysis, behavioral patterns. The math, written down once.</div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-k">templates/</div>
+        <div class="anatomy-v">Output shapes. Every run fills these in. Consistent across runs, diffable across versions.</div>
+      </div>
+      <p class="callout" style="margin-top: 18px; font-size: 18px;"><strong>No code.</strong> No framework lock-in. A literate analyst could read this skill in an afternoon and extend it.</p>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">14</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 15 · Pricing skill · Sample Output -->
+<!-- ============================================================ -->
+<section class="slide">
+  <span class="badge">A Real Run, Redacted</span>
+  <h2>What comes out the other side.</h2>
+  <p style="margin-top: -14px; margin-bottom: 22px; font-size: 19px; color: var(--muted);">An actual pricing run for an enterprise customer. Customer name redacted. Methodology intact.</p>
+  <div class="grid-2" style="gap: 36px; align-items: flex-start;">
+    <pre style="margin-top: 0;"><span class="c"># The deliverables</span>
+
+~/claude-outputs/pricing/lumifai-customer-a/
+├── <span class="k">PRICING-STRATEGY.md</span>        <span class="c"># 681 lines</span>
+│   <span class="c">#   Executive summary</span>
+│   <span class="c">#   EVC decomposition</span>
+│   <span class="c">#   Competitive landscape (6 competitors)</span>
+│   <span class="c">#   4 methodologies, scored</span>
+│   <span class="c">#   Board deliberation, 3 rounds</span>
+│   <span class="c">#   Recommended pricing + sensitivity</span>
+├── <span class="k">PRICING-WORKBENCH.html</span>     <span class="c"># interactive workbench</span>
+│   <span class="c">#   Sliders for volume, capture %</span>
+│   <span class="c">#   Live margin + ROI recomputation</span>
+├── <span class="k">CUSTOMER-A-PROPOSAL.md</span>     <span class="c"># sales-ready one-pager</span>
+└── pricing_status.md             <span class="c"># run metadata</span></pre>
+    <div>
+      <h3 style="margin-top: 0;">The shape of a good answer.</h3>
+      <div class="anatomy-row">
+        <div class="anatomy-k">Hybrid · vol-tiered</div>
+        <div class="anatomy-v">$2K/mo platform fee + $120–$200/contract by volume. Floor at $24K/yr. Natural expansion as the customer scales.</div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-k">EVC anchored</div>
+        <div class="anatomy-v">Value = $88K–$194K/yr. Capture = 34–55%. Every input sourced from BLS, NSC, or a named benchmark. Confidence tagged on every row.</div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-k">Pilot engineered</div>
+        <div class="anatomy-v">$10K for 90 days, 2 projects, ~20 contracts. Designed to de-risk procurement before the annual decision.</div>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-k">Sales-ready</div>
+        <div class="anatomy-v">The one-pager goes in the email. The 681-line strategy is what you defend when legal or finance pushes back.</div>
+      </div>
+      <p class="callout" style="margin-top: 16px; font-size: 17px;"><strong>Time to this output:</strong> ~40 min, unattended. <strong>Previous version:</strong> 3 weeks, 4 people, a lot of Slack threads.</p>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">15</span></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 16 · Demo 3 · GTM (dark variant) -->
 <!-- ============================================================ -->
 <section class="slide dark">
   <div class="demo-frame">
@@ -799,26 +979,26 @@ Flag anything I'd regret signing.</pre>
       <strong style="color: var(--warn-soft);">Disclosure:</strong> running this today against a market we don't sell into. Real people, real public data, but no one I'd ever pitch. Real outreach gets human review before any send. Always.
     </p>
   </div>
-  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">13</span></div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">16</span></div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 14 · Three jobs done -->
+<!-- SLIDE 17 · Three jobs done -->
 <!-- ============================================================ -->
 <section class="slide center">
   <div style="max-width: 1100px;">
     <span class="badge">Pause</span>
     <h1 style="font-size: 76px;">Three demos. Three jobs done.</h1>
-    <p style="font-size: 28px; color: var(--ink-soft); line-height: 1.5; margin-top: 12px;">Lawyer work. Slide work. Salesperson work.</p>
+    <p style="font-size: 28px; color: var(--ink-soft); line-height: 1.5; margin-top: 12px;">Lawyer work. Pricing work. Salesperson work.</p>
     <p style="font-size: 28px; color: var(--ink-soft); line-height: 1.5;">Each skill: a short file. No code, no deployment.</p>
     <p style="font-size: 28px; color: var(--ink-soft); line-height: 1.5;">Each one: built once, runs forever.</p>
     <p style="font-size: 34px; font-weight: 600; color: var(--accent); margin-top: 44px;">Now imagine thirty of these. For everything you do twice.</p>
   </div>
-  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">14</span></div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">17</span></div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 15 · Rate limits -->
+<!-- SLIDE 18 · Rate limits -->
 <!-- ============================================================ -->
 <section class="slide">
   <span class="badge" style="background: var(--warn-soft); color: var(--warn);">Read This Before You Build</span>
@@ -832,7 +1012,6 @@ Flag anything I'd regret signing.</pre>
         <tr><td><strong>LinkedIn messages (1st degree)</strong></td><td>50</td><td>Soft flag, reduced reach</td></tr>
         <tr><td><strong>Cold email (warmed inbox)</strong></td><td>50</td><td>Spam folder, sender reputation hit</td></tr>
         <tr><td><strong>Cold email (new inbox)</strong></td><td>Start at 10, ramp over 4 weeks</td><td>Domain blacklist</td></tr>
-        <tr><td><strong>Auto-apply</strong></td><td>5–10 roles you actually want</td><td>Recruiter blacklist (spray equals death)</td></tr>
       </tbody>
     </table>
   </div>
@@ -840,13 +1019,13 @@ Flag anything I'd regret signing.</pre>
     <strong>Three rules. Always.</strong><br/>
     1. Never auto-send to a real human without human review.<br/>
     2. Respect captchas. They exist for a reason.<br/>
-    3. The skill is your assistant, not your replacement.
+    3. For job applications — review the CSV first. The skill can apply at any scale. Apply only to roles you actually want.
   </div>
-  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">15</span></div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">18</span></div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 16 · Why a terminal -->
+<!-- SLIDE 19 · Why a terminal -->
 <!-- ============================================================ -->
 <section class="slide">
   <span class="badge">Fair Question</span>
@@ -856,22 +1035,35 @@ Flag anything I'd regret signing.</pre>
     <div class="card">
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); margin-bottom: 6px; letter-spacing: 0.06em;">CLAUDE CODE &middot; CLI</div>
       <div class="card-title">What we're using today.</div>
-      <div class="card-body">Runs in your terminal (Mac, Windows, Linux). Full agent power: every tool, every hook, every pipeline, sub-agents, schedules. Unfamiliar for the first thirty minutes. Then not.</div>
-      <p class="small" style="margin-top: 14px; color: var(--accent); font-weight: 600; font-size: 15px;">Ceiling: highest.</p>
+      <div class="card-body">Runs in your terminal. Build hooks, scripts, memory structures, project catalogs, sub-agents. Own the infrastructure. Skills you build here run unattended, version-control cleanly, and compound over time.</div>
+      <p class="small" style="margin-top: 14px; color: var(--accent); font-weight: 600; font-size: 15px;">For building with Claude.</p>
     </div>
     <div class="card tinted">
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); margin-bottom: 6px; letter-spacing: 0.06em;">COWORK &middot; GUI</div>
       <div class="card-title">The desktop-app version.</div>
-      <div class="card-body">Same Claude, same skills, click-and-type. Lives in the Claude Desktop app (Mac and Windows). Part of Claude Pro and Max plans. Launched January 2026.</div>
-      <p class="small" style="margin-top: 14px; color: var(--muted); font-style: italic; font-size: 15px;">Ceiling: lower. On-ramp: gentler.</p>
+      <div class="card-body">Same Claude, same skills, click-and-type. Excellent for ad-hoc tasks and daily work. No hooks, no scripts, no custom automation infrastructure. Launched January 2026.</div>
+      <p class="small" style="margin-top: 14px; color: var(--muted); font-style: italic; font-size: 15px;">For using Claude.</p>
     </div>
   </div>
-  <p class="callout" style="margin-top: 28px;"><strong>Today, we're in the terminal.</strong> Push through the first half hour. Once this workshop is done, explore Cowork on your own as a lighter alternative.</p>
-  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">16</span></div>
+  <div class="grid-3" style="gap: 20px; margin-top: 28px;">
+    <div style="background: var(--accent-soft); border-radius: 12px; padding: 18px 20px;">
+      <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Build, don't just use.</div>
+      <div style="font-size: 14px; color: var(--ink-soft);">Skills, memory, hooks, pipelines — infrastructure that compounds.</div>
+    </div>
+    <div style="background: var(--accent-soft); border-radius: 12px; padding: 18px 20px;">
+      <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">You own it.</div>
+      <div style="font-size: 14px; color: var(--ink-soft);">Files on your machine. Git-versioned. Runs unattended.</div>
+    </div>
+    <div style="background: var(--accent-soft); border-radius: 12px; padding: 18px 20px;">
+      <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Not locked in.</div>
+      <div style="font-size: 14px; color: var(--ink-soft);">SKILL.md is markdown. MCP is an open protocol. If a better model ships tomorrow, you port in an afternoon.</div>
+    </div>
+  </div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">19</span></div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 17 · Build intro -->
+<!-- SLIDE 20 · Build intro -->
 <!-- ============================================================ -->
 <section class="slide center">
   <div style="max-width: 1050px;">
@@ -884,16 +1076,16 @@ Flag anything I'd regret signing.</pre>
         <div class="card-body">Works on LinkedIn, Lever, Greenhouse, Workday, any career page. More importantly, you'll reuse this exact pattern (URL in, memory, tailored files out) for every recurring task you have.</div>
       </div>
       <div class="card tinted" style="text-align: left;">
-        <div class="card-title">Finished early? Card 8.</div>
+        <div class="card-title">Finished early? Card 4 Bonus.</div>
         <div class="card-body">Build <strong>Meeting Prep Copilot</strong> in a single paste. Same architecture, different domain. Proves the pattern generalizes.</div>
       </div>
     </div>
   </div>
-  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">17</span></div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">20</span></div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 18 · What you'll have -->
+<!-- SLIDE 21 · What you'll have -->
 <!-- ============================================================ -->
 <section class="slide">
   <span class="badge">Build · The Outcome</span>
@@ -924,15 +1116,15 @@ Flag anything I'd regret signing.</pre>
     </div>
   </div>
   <p class="callout" style="margin-top: 20px;"><strong>Everything is a file.</strong> Edit, share, version-control, attach to applications.</p>
-  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">18</span></div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">21</span></div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 19 · Setup + Cards 1-3 -->
+<!-- SLIDE 22 · Setup + Cards 1-3 -->
 <!-- ============================================================ -->
 <section class="slide">
   <span class="badge">Build · Start Here</span>
-  <h2>Setup, then Cards 1 to 3.</h2>
+  <h2>Setup, then Cards 1 and 2.</h2>
   <div style="margin-top: 20px; display: grid; grid-template-columns: 260px 1fr; gap: 36px;">
     <div>
       <h3 style="margin-top: 0; font-size: 20px;">60-second setup</h3>
@@ -945,65 +1137,60 @@ Flag anything I'd regret signing.</pre>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
-          <div class="t" style="font-size: 16px;">Open prompt cards</div>
-          <div class="d" style="font-size: 14px;"><a href="cards.html" target="_blank" style="color: var(--accent); font-weight: 600; text-decoration: underline;">cards.html</a> in a new tab</div>
+          <div class="t" style="font-size: 16px;">Install Playwright MCP</div>
+          <div class="d" style="font-size: 14px;">One command — Card 0 has it.</div>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
-          <div class="t" style="font-size: 16px;">Job URL ready</div>
-          <div class="d" style="font-size: 14px;">Any real job.</div>
+          <div class="t" style="font-size: 16px;">Open prompt cards</div>
+          <div class="d" style="font-size: 14px;"><a href="cards.html" target="_blank" style="color: var(--accent); font-weight: 600; text-decoration: underline;">cards.html</a> in a new tab</div>
         </div>
       </div>
     </div>
     <div>
-      <h3 style="margin-top: 0; font-size: 20px;">Cards 1 to 3</h3>
-      <div class="grid-3" style="gap: 14px;">
+      <h3 style="margin-top: 0; font-size: 20px;">Cards 1 and 2</h3>
+      <div class="grid-2" style="gap: 14px;">
         <div class="card" style="padding: 18px;">
           <div class="card-title" style="font-size: 15px;">Card 1 · Create</div>
-          <div class="card-body" style="font-size: 14px;">Paste. Claude writes SKILL.md. Read it. That file IS your skill.</div>
+          <div class="card-body" style="font-size: 14px;">One paste. Claude writes the full skill — intake, discovery, apply, LinkedIn outreach. Read SKILL.md when done.</div>
         </div>
         <div class="card" style="padding: 18px;">
-          <div class="card-title" style="font-size: 15px;">Card 2 · Memory</div>
-          <div class="card-body" style="font-size: 14px;">Teach it your resume. Ask once. Save. Never re-ask.</div>
-        </div>
-        <div class="card" style="padding: 18px;">
-          <div class="card-title" style="font-size: 15px;">Card 3 · Run</div>
-          <div class="card-body" style="font-size: 14px;">Paste a real job URL. Watch the pipeline run. 90s to 3min.</div>
+          <div class="card-title" style="font-size: 15px;">Card 2 · Run</div>
+          <div class="card-body" style="font-size: 14px;">One sentence. Skill asks for your details, searches for roles, builds the CSV, drafts every message.</div>
         </div>
       </div>
-      <pre style="margin-top: 18px; font-size: 13px;"><span class="c"># Card 3 (preview)</span>
-Use the job-hunt-copilot skill on this job:
-
-<span class="s">https://[paste any real job URL here]</span></pre>
+      <pre style="margin-top: 18px; font-size: 13px;"><span class="c"># Card 2 (preview)</span>
+Use the job-hunt-copilot skill. Find me 10 relevant
+roles and prepare applications for the best ones.</pre>
     </div>
   </div>
-  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">19</span></div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">22</span></div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 20 · Cards 4-5 -->
+<!-- SLIDE 23 · Cards 4-5 -->
 <!-- ============================================================ -->
 <section class="slide">
   <span class="badge">Build · Cards 4 and 5</span>
-  <h2>Refine, then verify.</h2>
+  <h2>What you should be looking at now.</h2>
   <div class="grid-2" style="gap: 32px; margin-top: 12px;">
     <div class="card">
-      <div class="card-title">Card 4 · Refine</div>
-      <div class="card-body">Lock in your voice. Save tone preferences so every future run follows them. <strong>This is the moment skills compound.</strong> After 5 jobs, drafts feel like they came from your hand.</div>
+      <div class="card-title">The pipeline CSV</div>
+      <div class="card-body">8–12 roles. Each row has a company, role, contact name, LinkedIn URL, a drafted cold email, and a LinkedIn message. Open it. Read a few drafts. <strong>Change Status to "Apply" for roles you want.</strong></div>
     </div>
     <div class="card">
-      <div class="card-title">Card 5 · Verify</div>
-      <div class="card-body">Have Claude show you everything it created. SKILL.md path, saved resume, saved preferences, each output folder, the tracker xlsx. <strong>If you see all of it, you've built a working skill.</strong></div>
+      <div class="card-title">Then type one word</div>
+      <div class="card-body">Go back to Claude and type <code style="background: var(--bg-tint); padding: 2px 6px; border-radius: 4px;">execute</code>. The skill reads your approved rows, opens a browser, fills the application, stages the LinkedIn message, and asks you to confirm before sending anything.</div>
     </div>
   </div>
-  <p class="callout" style="margin-top: 24px;">Tomorrow, on the next job you find, you only paste Card 3 with a new URL. The skill does the rest.</p>
-  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">20</span></div>
+  <p class="callout" style="margin-top: 24px;">Next week: open Claude, say "find me 10 relevant roles." <strong>That sentence is all you need.</strong></p>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">23</span></div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 21 · The reveal -->
+<!-- SLIDE 24 · The reveal -->
 <!-- ============================================================ -->
 <section class="slide">
   <span class="badge">The Reveal</span>
@@ -1012,12 +1199,8 @@ Use the job-hunt-copilot skill on this job:
   <p>Same skill. A weekend of work. Now it does this:</p>
   <div class="grid-2" style="margin-top: 16px; gap: 24px;">
     <div class="card tinted">
-      <div class="card-title">+ Browser auto-fill</div>
-      <div class="card-body">For Lever and Greenhouse, opens the apply page in a browser, pre-fills name, email, resume. You review, you click submit.</div>
-    </div>
-    <div class="card tinted">
-      <div class="card-title">+ Multi-job batch mode</div>
-      <div class="card-body">Paste 10 URLs. The skill fans out via sub-agents, processes all 10 in parallel, returns one consolidated tracker.</div>
+      <div class="card-title">+ Parallel batch via sub-agents</div>
+      <div class="card-body">Say "find 20 roles." The skill spins up sub-agents in parallel — each handles one role simultaneously. One tracker when they're done.</div>
     </div>
     <div class="card tinted">
       <div class="card-title">+ Follow-up scheduler</div>
@@ -1027,13 +1210,17 @@ Use the job-hunt-copilot skill on this job:
       <div class="card-title">+ Calendar integration</div>
       <div class="card-body">When a recruiter replies with interview slots, parses the email, checks your calendar via MCP, drafts a reply with your availability.</div>
     </div>
+    <div class="card tinted">
+      <div class="card-title">+ Hooks for passive monitoring</div>
+      <div class="card-body">A daily hook checks new postings at target companies. No prompt needed — runs automatically, surfaces roles to you each morning.</div>
+    </div>
   </div>
   <p class="callout" style="margin-top: 20px;"><strong>None of this is hard.</strong> Same pattern, applied four more times. Do it this weekend.</p>
-  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">21</span></div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">24</span></div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 22 · Best practices (trimmed to 4 + warn) -->
+<!-- SLIDE 25 · Best practices (trimmed to 4 + warn) -->
 <!-- ============================================================ -->
 <section class="slide">
   <span class="badge">Best Practices</span>
@@ -1041,7 +1228,7 @@ Use the job-hunt-copilot skill on this job:
   <div class="grid-2" style="margin-top: 20px; gap: 22px;">
     <div class="card">
       <div class="card-title">1. Always review before sending.</div>
-      <div class="card-body">Drafts to file. Human eyes before any human reads it. Skills produce drafts, never auto-send.</div>
+      <div class="card-body">Skills stage drafts — nothing goes to a real human without your explicit approval. You read it, you approve it, then it sends.</div>
     </div>
     <div class="card">
       <div class="card-title">2. Save preferences as you discover them.</div>
@@ -1060,11 +1247,11 @@ Use the job-hunt-copilot skill on this job:
     <div class="card-title" style="color: var(--warn);">The one rule above all rules</div>
     <div class="card-body">Never store secrets (API keys, passwords, financial credentials) in skill files, memory files, or anything that could end up on someone else's screen.</div>
   </div>
-  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">22</span></div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">25</span></div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 23 · What to build next -->
+<!-- SLIDE 26 · What to build next -->
 <!-- ============================================================ -->
 <section class="slide">
   <span class="badge">What's Next</span>
@@ -1095,11 +1282,11 @@ Use the job-hunt-copilot skill on this job:
       <div class="card-body">Notice yourself doing the same thing twice. Describe it in plain English. Make it a skill. Refine over a week. Done.</div>
     </div>
   </div>
-  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">23</span></div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">26</span></div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 24 · Resources -->
+<!-- SLIDE 27 · Resources -->
 <!-- ============================================================ -->
 <section class="slide">
   <span class="badge">Resources</span>
@@ -1119,19 +1306,17 @@ Use the job-hunt-copilot skill on this job:
       <p class="small">Password: <code class="inline">ASB2026</code></p>
     </div>
     <div class="card dark">
-      <h3 style="color: white;">My ask</h3>
-      <p>If you build something cool with this, a skill that saves you hours every week, <strong style="color: white;">tell me about it.</strong></p>
-      <p>Email me what you built and I'll send you back a critique plus ideas to extend it.</p>
+      <h3 style="color: white;">Questions?</h3>
+      <p>Reach out any time — happy to help with anything you're building or stuck on.</p>
       <p style="margin-top: 24px;"><strong style="color: white;">sharan.jm16@gmail.com</strong></p>
       <p style="margin: 4px 0 0;"><a href="https://www.linkedin.com/in/sharanjm/" target="_blank" style="color: white; text-decoration: underline;">linkedin.com/in/sharanjm</a></p>
-      <p class="small" style="color: rgba(255,255,255,0.6); margin-top: 12px;">I read every reply.</p>
     </div>
   </div>
-  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">24</span></div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">27</span></div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 25 · Q&A -->
+<!-- SLIDE 28 · Q&A -->
 <!-- ============================================================ -->
 <section class="slide center">
   <div style="max-width: 900px;">
@@ -1140,7 +1325,7 @@ Use the job-hunt-copilot skill on this job:
     <p style="font-size: 24px; color: var(--muted); margin-top: 64px;">Thank you, ASB.</p>
     <p style="font-size: 18px; color: var(--muted); margin-top: 8px;">Sharan JM · ASB '18 · Kuala Lumpur · April 2026</p>
   </div>
-  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">25</span></div>
+  <div class="footer-bar"><span>Claude Code for Business</span><span class="pagenum">28</span></div>
 </section>
 
 </div>
