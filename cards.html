@@ -14,7 +14,6 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Minimal palette — warm off-white, near-black, one terracotta accent */
     --bg: #F5F4EE;
     --bg-tint: #EBE7DC;
     --ink: #141413;
@@ -41,37 +40,13 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
     line-height: 1.55;
   }
   .wrap { max-width: 880px; margin: 0 auto; padding: 48px 24px 96px; }
-
-  header {
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 24px;
-    margin-bottom: 48px;
-  }
-  .pre {
-    font-size: 12px; font-weight: 700; letter-spacing: 0.22em;
-    text-transform: uppercase; color: var(--accent);
-    margin-bottom: 12px;
-  }
-  h1 {
-    font-size: 44px; font-weight: 800;
-    letter-spacing: -0.02em; line-height: 1.05;
-    margin: 0 0 16px;
-  }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 24px; margin-bottom: 48px; }
+  .pre { font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  h1 { font-size: 44px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 16px; }
   .subtitle { font-size: 19px; color: var(--ink-soft); margin: 0 0 8px; }
   .meta { font-size: 14px; color: var(--muted); display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px; }
-
-  .toc {
-    background: var(--bg-tint);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 24px 28px;
-    margin-bottom: 56px;
-  }
-  .toc h2 {
-    font-size: 13px; font-weight: 700; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--muted);
-    margin: 0 0 14px;
-  }
+  .toc { background: var(--bg-tint); border: 1px solid var(--line); border-radius: 12px; padding: 24px 28px; margin-bottom: 56px; }
+  .toc h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
   .toc ol { margin: 0; padding-left: 20px; }
   .toc li { margin-bottom: 6px; font-size: 16px; color: var(--ink-soft); }
   .toc li a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
@@ -79,145 +54,42 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
   .toc .tier { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; letter-spacing: 0.06em; }
   .tier.t1 { background: var(--accent-soft); color: var(--accent); }
   .tier.t2 { background: var(--warn-soft); color: var(--warn); }
-
-  .card {
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    margin-bottom: 32px;
-    overflow: hidden;
-    scroll-margin-top: 24px;
-  }
-  .card-head {
-    padding: 20px 28px 16px;
-    border-bottom: 1px solid var(--line);
-    background: var(--bg-tint);
-  }
-  .card-num {
-    font-size: 12px; font-weight: 700; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--accent);
-    margin-bottom: 6px;
-  }
-  .card-title {
-    font-size: 22px; font-weight: 700; color: var(--ink);
-    margin: 0 0 6px;
-  }
-  .card-purpose {
-    font-size: 15px; color: var(--muted);
-    margin: 0;
-  }
+  .card { background: white; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 32px; overflow: hidden; scroll-margin-top: 24px; }
+  .card-head { padding: 20px 28px 16px; border-bottom: 1px solid var(--line); background: var(--bg-tint); }
+  .card-num { font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .card-title { font-size: 22px; font-weight: 700; color: var(--ink); margin: 0 0 6px; }
+  .card-purpose { font-size: 15px; color: var(--muted); margin: 0; }
   .card-body { padding: 24px 28px; }
   .card-body > p { margin: 0 0 14px; font-size: 15px; color: var(--ink-soft); }
-
-  .prompt-wrap {
-    position: relative;
-    margin-top: 16px;
-  }
-  .prompt {
-    background: var(--code-bg);
-    color: var(--code-ink);
-    padding: 22px 24px;
-    border-radius: 10px;
-    font-family: 'JetBrains Mono', Menlo, monospace;
-    font-size: 13.5px;
-    line-height: 1.7;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    margin: 0;
-  }
+  .prompt-wrap { position: relative; margin-top: 16px; }
+  .prompt { background: var(--code-bg); color: var(--code-ink); padding: 22px 24px; border-radius: 10px; font-family: 'JetBrains Mono', Menlo, monospace; font-size: 13.5px; line-height: 1.7; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; margin: 0; }
   .prompt .c { color: var(--code-comment); font-style: italic; }
   .prompt .h { color: var(--code-accent); font-weight: 600; }
   .prompt .s { color: var(--code-string); }
   .prompt .em { color: white; font-weight: 700; }
-
-  .copy-btn {
-    position: absolute;
-    top: 12px; right: 12px;
-    background: rgba(245,244,238,0.08);
-    color: var(--code-ink);
-    border: 1px solid rgba(245,244,238,0.18);
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
+  .copy-btn { position: absolute; top: 12px; right: 12px; background: rgba(245,244,238,0.08); color: var(--code-ink); border: 1px solid rgba(245,244,238,0.18); padding: 6px 12px; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
   .copy-btn:hover { background: rgba(245,244,238,0.16); }
   .copy-btn.copied { background: var(--accent); border-color: var(--accent); color: white; }
-
-  .checklist {
-    background: var(--bg-tint);
-    border-left: 3px solid var(--ink);
-    padding: 14px 18px;
-    border-radius: 0 8px 8px 0;
-    margin-top: 18px;
-    font-size: 14px;
-    color: var(--ink-soft);
-  }
+  .checklist { background: var(--bg-tint); border-left: 3px solid var(--ink); padding: 14px 18px; border-radius: 0 8px 8px 0; margin-top: 18px; font-size: 14px; color: var(--ink-soft); }
   .checklist strong { color: var(--ink); }
   .checklist ul { margin: 8px 0 0; padding-left: 18px; }
   .checklist li { margin-bottom: 4px; }
-
-  .tip {
-    background: var(--accent-soft);
-    border-left: 3px solid var(--accent);
-    padding: 14px 18px;
-    border-radius: 0 8px 8px 0;
-    margin-top: 18px;
-    font-size: 14px;
-    color: var(--ink-soft);
-  }
+  .tip { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 14px 18px; border-radius: 0 8px 8px 0; margin-top: 18px; font-size: 14px; color: var(--ink-soft); }
   .tip strong { color: var(--accent); }
-
-  .warn {
-    background: var(--warn-soft);
-    border-left: 3px solid var(--warn);
-    padding: 14px 18px;
-    border-radius: 0 8px 8px 0;
-    margin-top: 18px;
-    font-size: 14px;
-    color: var(--ink-soft);
-  }
+  .warn { background: var(--warn-soft); border-left: 3px solid var(--warn); padding: 14px 18px; border-radius: 0 8px 8px 0; margin-top: 18px; font-size: 14px; color: var(--ink-soft); }
   .warn strong { color: var(--warn); }
-
-  .divider {
-    text-align: center;
-    margin: 64px 0 48px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--muted);
-    position: relative;
-  }
-  .divider::before, .divider::after {
-    content: '';
-    position: absolute;
-    top: 50%; width: 30%;
-    height: 1px; background: var(--line);
-  }
+  .divider { text-align: center; margin: 64px 0 48px; font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); position: relative; }
+  .divider::before, .divider::after { content: ''; position: absolute; top: 50%; width: 30%; height: 1px; background: var(--line); }
   .divider::before { left: 0; }
   .divider::after { right: 0; }
-
-  footer {
-    margin-top: 64px;
-    padding-top: 24px;
-    border-top: 1px solid var(--line);
-    font-size: 13px;
-    color: var(--muted);
-    text-align: center;
-  }
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); text-align: center; }
   footer a { color: var(--accent); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
-
   @media (max-width: 600px) {
     .wrap { padding: 32px 16px 64px; }
     h1 { font-size: 32px; }
     .card-body, .card-head { padding-left: 18px; padding-right: 18px; }
-    .prompt { font-size: 12px; padding: 18px 18px; }
+    .prompt { font-size: 12px; padding: 18px; }
   }
 </style>
 </head>
@@ -227,26 +99,22 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
 <header>
   <div class="pre">ASB Workshop · Hands-on Build</div>
   <h1>Job Hunt Copilot · Prompt Cards</h1>
-  <p class="subtitle">Copy each card. Paste into Claude Code. In sequence. That's the whole exercise.</p>
+  <p class="subtitle">Copy each card. Paste into Claude Code. In sequence.</p>
   <div class="meta">
     <span><strong style="color: var(--ink);">Time:</strong> 25–30 minutes</span>
-    <span><strong style="color: var(--ink);">Tier 1:</strong> Cards 0–5 (everyone)</span>
-    <span><strong style="color: var(--ink);">Tier 2:</strong> Cards 6–8 (bonus)</span>
+    <span><strong style="color: var(--ink);">Tier 1:</strong> Cards 0–2 (everyone)</span>
+    <span><strong style="color: var(--ink);">Tier 2:</strong> Cards 3–4 (bonus)</span>
   </div>
 </header>
 
 <div class="toc">
-  <h2>What you'll do</h2>
+  <h2>What you'll build</h2>
   <ol>
-    <li><a href="#card-0">Setup check</a><span class="tier t1">Tier 1</span></li>
-    <li><a href="#card-1">Create the skill</a><span class="tier t1">Tier 1</span></li>
-    <li><a href="#card-2">Teach it to remember your resume</a><span class="tier t1">Tier 1</span></li>
-    <li><a href="#card-3">Run it on a real job</a><span class="tier t1">Tier 1</span></li>
-    <li><a href="#card-4">Refine: lock in your voice</a><span class="tier t1">Tier 1</span></li>
-    <li><a href="#card-5">Verify what you built</a><span class="tier t1">Tier 1</span></li>
-    <li><a href="#card-6">Bonus: browser auto-fill (Lever / Greenhouse)</a><span class="tier t2">Tier 2</span></li>
-    <li><a href="#card-7">Bonus: batch mode (10 jobs at once)</a><span class="tier t2">Tier 2</span></li>
-    <li><a href="#card-8">Bonus: build Meeting Prep Copilot (one paste)</a><span class="tier t2">Tier 2</span></li>
+    <li><a href="#card-0">Setup — Claude Code + Playwright MCP</a><span class="tier t1">Tier 1</span></li>
+    <li><a href="#card-1">Create the skill (everything baked in)</a><span class="tier t1">Tier 1</span></li>
+    <li><a href="#card-2">Run it</a><span class="tier t1">Tier 1</span></li>
+    <li><a href="#card-3">Bonus: Batch mode — paste your own URLs</a><span class="tier t2">Tier 2</span></li>
+    <li><a href="#card-4">Bonus: Build Meeting Prep Copilot (one paste)</a><span class="tier t2">Tier 2</span></li>
   </ol>
 </div>
 
@@ -256,29 +124,34 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
 <section class="card" id="card-0">
   <div class="card-head">
     <div class="card-num">Card 0 · Setup</div>
-    <h3 class="card-title">Make sure Claude Code is running</h3>
-    <p class="card-purpose">60-second sanity check before we build.</p>
+    <h3 class="card-title">Claude Code + Playwright MCP</h3>
+    <p class="card-purpose">Two things to verify before we build. Takes 2 minutes.</p>
   </div>
   <div class="card-body">
-    <p>Open your terminal and run:</p>
+    <p><strong style="color:var(--ink);">Step 1 — Start Claude Code.</strong> Open your terminal and run:</p>
     <div class="prompt-wrap">
       <pre class="prompt"><span class="em">claude</span></pre>
       <button class="copy-btn" data-copy="claude">Copy</button>
     </div>
-    <p>You should see the Claude Code prompt. Then type:</p>
+    <p style="margin-top:20px;"><strong style="color:var(--ink);">Step 2 — Install Playwright MCP.</strong> This gives Claude a real browser. Paste this into your terminal (not into Claude — into the terminal directly):</p>
     <div class="prompt-wrap">
-      <pre class="prompt"><span class="em">/help</span></pre>
-      <button class="copy-btn" data-copy="/help">Copy</button>
+      <pre class="prompt"><span class="em">claude mcp add playwright -- npx @playwright/mcp@latest</span></pre>
+      <button class="copy-btn" data-copy="claude mcp add playwright -- npx @playwright/mcp@latest">Copy</button>
+    </div>
+    <p style="margin-top:20px;"><strong style="color:var(--ink);">Step 3 — Restart Claude Code, then verify it connected.</strong> Close Claude Code and reopen it with <code>claude</code>, then paste this inside Claude:</p>
+    <div class="prompt-wrap">
+      <pre class="prompt" id="p0check">What MCP servers do you have connected? List them.</pre>
+      <button class="copy-btn" data-target="p0check">Copy</button>
     </div>
     <div class="checklist">
       <strong>Ready when you see:</strong>
       <ul>
-        <li>The Claude Code prompt (something like <code>&gt;</code> waiting for input)</li>
-        <li>The /help output listing available commands</li>
+        <li>Claude lists <strong>playwright</strong> as a connected MCP server</li>
+        <li>It mentions browser tools like navigate, click, fill</li>
       </ul>
     </div>
     <div class="warn">
-      <strong>Stuck?</strong> Raise your hand. A TA will help. Don't fall behind on setup.
+      <strong>Stuck on the MCP install?</strong> Raise your hand. The browser automation in Card 3 won't work without this. Don't skip it.
     </div>
   </div>
 </section>
@@ -289,378 +162,264 @@ if (localStorage.getItem('asb-access') !== 'granted' && !location.search.include
 <section class="card" id="card-1">
   <div class="card-head">
     <div class="card-num">Card 1 · Create</div>
-    <h3 class="card-title">Build the skill from scratch</h3>
-    <p class="card-purpose">One paste. Claude creates the folder and writes SKILL.md for you.</p>
+    <h3 class="card-title">Build the full skill in one paste</h3>
+    <p class="card-purpose">This creates the SKILL.md that knows everything — intake, discovery, CSV, browser apply, LinkedIn outreach. Read it when done.</p>
   </div>
   <div class="card-body">
     <p>Copy this entire block. Paste into Claude Code. Hit enter.</p>
     <div class="prompt-wrap">
-      <pre class="prompt" id="p1"><span class="c"># Card 1 — Create the Job Hunt Copilot skill</span>
+      <pre class="prompt" id="p1"><span class="c"># Card 1 — Create Job Hunt Copilot</span>
 
-Create a new skill called <span class="s">"job-hunt-copilot"</span> at
-<span class="s">~/.claude/skills/job-hunt-copilot/</span>
+Create a skill called <span class="s">"job-hunt-copilot"</span> at
+<span class="s">~/.claude/skills/job-hunt-copilot/SKILL.md</span>
 
-The skill should accept any job URL as input, including:
-- LinkedIn job postings
-- Lever, Greenhouse, Workday, Ashby career pages
-- Any company's own career site
+The skill has four phases. Bake all of them into SKILL.md.
 
-For each job URL, the skill should produce:
-1. A parsed copy of the job description
-2. A version of my resume tailored specifically to this role (ATS-friendly, mirrors the JD's keywords)
-3. A personalized cold email draft to send to the hiring manager
-4. A LinkedIn connection request note (under 280 characters)
-5. Public-web research on the likely hiring manager (do NOT scrape LinkedIn directly)
+<span class="h">── PHASE 1 · INTAKE (runs once, everything saved to memory) ──────</span>
 
-Save all outputs to:
-<span class="s">~/claude-outputs/job-hunt/{company-slug}-{YYYY-MM-DD}/</span>
+On first run, collect and save to memory:
+  - Resume (paste or file path) → memory/job-hunt-resume.md
+  - Target role types            → memory/job-hunt-prefs.md
+  - Industries of interest
+  - Preferred geography
+  - Company preferences (blacklist, whitelist, size preference)
+  - LinkedIn profile URL          → memory/job-hunt-linkedin.md
+  - Message style (or leave blank — skill writes one from resume)
 
-Maintain a master tracker at:
-<span class="s">~/claude-outputs/job-hunt/tracker.xlsx</span>
-with columns: Date, Company, Role, JD URL, Hiring Manager, Status, Output Folder
+Never re-ask for anything already saved in memory.
 
-<span class="h">CRITICAL RULES:</span>
-- Never auto-send any message. All outreach is drafts only.
-- Always show me the file paths after each run so I can find what was produced.
-- Respect rate limits if I ever ask for batch mode (max 20 connection requests/day, 50 emails/day).
+<span class="h">── PHASE 2 · DISCOVERY (triggered by "find me roles" or similar) ──</span>
 
-Write the SKILL.md file with proper frontmatter (name, description, when_to_use). When done, show me the SKILL.md content so I can read what you built.</pre>
+Using saved preferences:
+1. Search LinkedIn Jobs, Glassdoor, company career pages, and web
+   for matching roles posted in the last 14 days.
+2. Filter by: geography, role type, and company preferences.
+3. Skip any role already in tracker.xlsx.
+4. Target 8–12 results per run.
+5. For each role:
+   a. Identify the best person to connect with at that company
+      (hiring manager or team member). Search LinkedIn and the web.
+      Save name + LinkedIn URL if found.
+   b. Draft a cold email (under 120 words, role-specific, company-specific).
+   c. Draft a LinkedIn connection message (under 280 characters, not
+      "I'm job hunting" — one genuine reason to connect).
+6. Save to ~/claude-outputs/job-hunt/pipeline-{YYYY-MM-DD}.csv
+   Columns: Company | Role | Location | Posted | Apply URL |
+   Apply Method | Match Reason | Contact Name | Contact LinkedIn URL |
+   Cold Email Draft | LinkedIn Message | Status
+   Apply Method = Portal / LinkedIn Easy Apply / Email
+   Status = Pending (user changes to Apply / Skip / Hold)
+7. Update tracker.xlsx with new rows (Status = Pending).
+8. Show a summary table: Company | Role | Location | Match Reason
+9. Say: "CSV saved. Open it, mark the roles you want as Apply, then
+   tell me 'execute' to start applying."
+
+<span class="h">── PHASE 3 · EXECUTE (triggered by "execute" or "apply now") ──────</span>
+
+Read the most recent pipeline CSV. For every row where Status = Apply:
+
+Portal roles (Apply Method = Portal):
+  1. Use Playwright to open the Apply URL in a visible browser.
+  2. Pre-fill all standard fields from saved profile:
+     name, email, phone, LinkedIn URL, resume.
+  3. Use the cold email draft as cover letter text.
+  4. For non-standard fields (essays, salary, "why this company"):
+     STOP — show the question — wait for my answer — then continue.
+  5. When all fields are filled: scroll to Submit, highlight it, STOP.
+     Say: "Ready — please review and click Submit yourself."
+  6. NEVER click Submit automatically. Ever.
+
+LinkedIn connection (if Contact LinkedIn URL was found):
+  1. Use Playwright to open the contact's LinkedIn profile URL.
+  2. Click Connect → Add a note.
+  3. Pre-fill the LinkedIn Message from the CSV.
+  4. Show me the staged message and ask: "Send this connection request?"
+  5. If I say yes — click Send.
+  6. If I say no or ask for edits — update the message and ask again.
+
+After I confirm each action:
+  - Update tracker.xlsx: Status = Applied, Date = today
+  - Add follow-up note: Follow up by {today + 5 days}
+
+Process one role at a time. Ask before moving to the next.
+
+<span class="h">── RATE LIMIT RULES (always enforced) ──────────────────────────────</span>
+- Max 20–25 LinkedIn connection requests per day
+- Max 50 cold emails per day (warmed inbox)
+- Max 10 portal applications per session
+- If daily limit would be exceeded: warn me and stop
+
+<span class="h">── OUTPUT RULES (always enforced) ───────────────────────────────────</span>
+- All outputs are files. Nothing important lives only in chat.
+- Outputs folder: ~/claude-outputs/job-hunt/
+- Tracker: ~/claude-outputs/job-hunt/tracker.xlsx
+- Never guess facts. If uncertain, omit.
+- Never claim experience not on my resume.
+
+Write SKILL.md with frontmatter: name, description, when_to_use.
+Print the full SKILL.md when done.</pre>
       <button class="copy-btn" data-target="p1">Copy</button>
     </div>
     <div class="checklist">
       <strong>Done when:</strong>
       <ul>
-        <li>Claude shows you the SKILL.md file it created</li>
-        <li>You can see frontmatter (name, description) at the top</li>
-        <li>You can see numbered workflow steps in the body</li>
+        <li>Claude prints the full SKILL.md</li>
+        <li>You can see all four phases in the body</li>
+        <li>Frontmatter has name, description, and when_to_use</li>
       </ul>
     </div>
     <div class="tip">
-      <strong>Read the SKILL.md.</strong> Seriously. It's only about 60 lines and reading it will teach you more than any lecture about how skills work.
+      <strong>Read SKILL.md.</strong> It's 80–100 lines. Reading it is the whole lesson about how skills work — the card you just pasted taught Claude a job. Every card after this is just using what you built.
     </div>
   </div>
 </section>
 
 <!-- ============================================================ -->
-<!-- CARD 2 · Memory -->
+<!-- CARD 2 · Intake -->
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+<!-- CARD 2 · Run -->
 <!-- ============================================================ -->
 <section class="card" id="card-2">
   <div class="card-head">
-    <div class="card-num">Card 2 · Memory</div>
-    <h3 class="card-title">Teach it to remember your resume</h3>
-    <p class="card-purpose">Ask once. Save. Reuse forever. The memory pattern.</p>
+    <div class="card-num">Card 2 · Run</div>
+    <h3 class="card-title">Find me roles and apply</h3>
+    <p class="card-purpose">This is the whole pipeline in one sentence. The skill handles everything from here.</p>
   </div>
   <div class="card-body">
-    <p>Paste this. Claude will update SKILL.md to include the resume-memory pattern.</p>
+    <p>Paste this exactly as written. That's all.</p>
     <div class="prompt-wrap">
-      <pre class="prompt" id="p2"><span class="c"># Card 2 — Add resume memory</span>
-
-Update the job-hunt-copilot skill so that:
-
-1. The first time it runs, it checks for a saved resume at:
-   <span class="s">~/.claude/projects/-Users-{me}/memory/job-hunt-resume.md</span>
-
-2. If no resume is found, it asks me to either:
-   - Paste my resume as plain text, OR
-   - Provide a path to a PDF/DOCX of my resume
-
-3. Save the resume to the memory file above so all future runs use it automatically. Never re-ask.
-
-4. On every run, use the saved resume to produce a tailored version for the specific job description. The tailored version should:
-   - Mirror keywords from the JD (ATS optimization)
-   - Reorder bullets to surface most-relevant experience first
-   - Trim experience that's irrelevant to this role
-   - Stay under 1 page
-
-Show me the updated SKILL.md when done.</pre>
-      <button class="copy-btn" data-target="p2">Copy</button>
-    </div>
-    <div class="checklist">
-      <strong>Done when:</strong>
-      <ul>
-        <li>SKILL.md now mentions checking the memory file for a saved resume</li>
-        <li>The skill knows to ask for it once, save it, and never re-ask</li>
-      </ul>
-    </div>
-    <div class="tip">
-      <strong>The memory pattern</strong> is the single most powerful thing in this workshop. Use it in every skill you ever build.
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- CARD 3 · Run -->
-<!-- ============================================================ -->
-<section class="card" id="card-3">
-  <div class="card-head">
-    <div class="card-num">Card 3 · Run</div>
-    <h3 class="card-title">Run it on a real job</h3>
-    <p class="card-purpose">Pick a real job. Any site. Any role. Watch the skill go to work.</p>
-  </div>
-  <div class="card-body">
-    <p>Replace <code>[paste-job-url-here]</code> with a real URL. Then paste the whole thing.</p>
-    <div class="prompt-wrap">
-      <pre class="prompt" id="p3"><span class="c"># Card 3 — First real run</span>
-
-Use the job-hunt-copilot skill on this job:
-
-<span class="s">[paste-job-url-here]</span>
-
-If you don't have my resume yet, ask for it now. After this run, save it so I never have to provide it again.
-
-When done, show me:
-- The output folder path
-- A preview of the cold email draft
-- A preview of the LinkedIn note</pre>
+      <pre class="prompt" id="p3">Use the job-hunt-copilot skill. Find me 10 relevant roles and prepare applications for the best ones.</pre>
       <button class="copy-btn" data-target="p3">Copy</button>
     </div>
     <div class="checklist">
-      <strong>What you'll see Claude do:</strong>
+      <strong>What you'll watch happen (2–4 minutes):</strong>
       <ul>
-        <li>Fetch and parse the job description from the URL</li>
-        <li>Ask for your resume (first time only)</li>
-        <li>Search the web for the company plus likely hiring manager</li>
-        <li>Generate the tailored resume, email, and LinkedIn note</li>
-        <li>Save everything to your outputs folder</li>
+        <li>Claude searches for roles using your saved preferences</li>
+        <li>Filters by geography, work auth, freshness</li>
+        <li>Researches a contact at each company</li>
+        <li>Drafts a cold email + LinkedIn message per role</li>
+        <li>Saves a pipeline CSV and shows you a summary table</li>
+        <li>Asks you to open the CSV and mark rows as Apply / Skip</li>
       </ul>
     </div>
     <div class="tip">
-      <strong>Total time:</strong> 90 seconds to 3 minutes depending on how thorough the research is. Be patient. Watch what it's doing.
+      <strong>After the CSV appears:</strong> open it, read the drafts, change Status to <code>Apply</code> for roles you want. Then come back and type <code>execute</code> — Claude opens the browser and starts applying.
+    </div>
+    <div class="warn">
+      <strong>Before you type "execute":</strong> LinkedIn connection requests are capped at 20–25 per day. Don't mark more than 3–4 rows as Apply in your first session.
     </div>
   </div>
 </section>
 
 <!-- ============================================================ -->
-<!-- CARD 4 · Refine -->
-<!-- ============================================================ -->
-<section class="card" id="card-4">
-  <div class="card-head">
-    <div class="card-num">Card 4 · Refine</div>
-    <h3 class="card-title">Lock in your voice</h3>
-    <p class="card-purpose">The first draft is 80% there. This card teaches the skill your taste, forever.</p>
-  </div>
-  <div class="card-body">
-    <p>Edit the preferences if you want. Then paste.</p>
-    <div class="prompt-wrap">
-      <pre class="prompt" id="p4"><span class="c"># Card 4 — Save tone preferences</span>
-
-For the job-hunt-copilot skill, save these preferences to memory so every future run follows them automatically:
-
-<span class="h">Cold email tone:</span>
-- Warm and conversational, never corporate-stiff
-- Lead with WHY this specific role and this specific company, not generic enthusiasm
-- One concrete reference to something the company recently did or said
-- Maximum 120 words
-- Always end with a soft, single CTA (15-min coffee chat or quick call)
-
-<span class="h">LinkedIn note:</span>
-- Maximum 280 characters (LinkedIn's hard limit is 300, leave buffer)
-- One reason for connecting that isn't "I want a job"
-- No emojis
-
-<span class="h">Universal rules:</span>
-- Never use em dashes. Use commas, periods, or restructure the sentence.
-- Never claim experience I don't have on my resume.
-- Never use words like "leverage", "synergize", or "passionate about".
-- If unsure about a fact, leave it out rather than guess.
-
-Save these preferences to a memory file the skill reads on every run.</pre>
-      <button class="copy-btn" data-target="p4">Copy</button>
-    </div>
-    <div class="checklist">
-      <strong>Done when:</strong>
-      <ul>
-        <li>Claude confirms the preferences were saved to memory</li>
-        <li>Tells you the path to the memory file</li>
-      </ul>
-    </div>
-    <div class="tip">
-      <strong>Run Card 3 again.</strong> On a different job. Notice how the second draft already feels more like you. <strong>This is compounding.</strong>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- CARD 5 · Verify -->
-<!-- ============================================================ -->
-<section class="card" id="card-5">
-  <div class="card-head">
-    <div class="card-num">Card 5 · Verify</div>
-    <h3 class="card-title">Inspect what you built</h3>
-    <p class="card-purpose">Make sure all the artifacts actually exist on your machine.</p>
-  </div>
-  <div class="card-body">
-    <p>Paste this. Claude will list everything it created.</p>
-    <div class="prompt-wrap">
-      <pre class="prompt" id="p5"><span class="c"># Card 5 — Verify everything was created</span>
-
-Show me everything you've created so far for the job-hunt-copilot skill:
-
-1. The full path to SKILL.md and its line count
-2. The path to the saved resume in memory
-3. The path to the saved tone preferences in memory
-4. For each job I've run the skill on, list:
-   - The output folder
-   - Each file in that folder (with byte size)
-5. The tracker xlsx path and how many rows it has
-
-Then open and show me the cold email draft from the most recent run so I can read it.</pre>
-      <button class="copy-btn" data-target="p5">Copy</button>
-    </div>
-    <div class="checklist">
-      <strong>You should see:</strong>
-      <ul>
-        <li><code>~/.claude/skills/job-hunt-copilot/SKILL.md</code> exists</li>
-        <li>Resume plus tone preferences in your memory folder</li>
-        <li>One folder per job in <code>~/claude-outputs/job-hunt/</code></li>
-        <li>Each folder has 4 or 5 draft files</li>
-        <li><code>tracker.xlsx</code> with one row per job</li>
-      </ul>
-    </div>
-    <div class="tip">
-      <strong>If everything checks out, congratulations.</strong> You built a working skill. Tomorrow, on the next job you find, you only need to paste Card 3 with a new URL.
-    </div>
-  </div>
-</section>
-
 <div class="divider">Bonus · Tier 2 · For fast finishers</div>
 
 <!-- ============================================================ -->
-<!-- CARD 6 · Browser auto-fill -->
+<!-- CARD 3 · Batch with specific URLs -->
 <!-- ============================================================ -->
-<section class="card" id="card-6">
+<section class="card" id="card-3">
   <div class="card-head">
-    <div class="card-num">Card 6 · Bonus 1</div>
-    <h3 class="card-title">Browser auto-fill (Lever / Greenhouse)</h3>
-    <p class="card-purpose">Add Playwright. Skill opens the apply page and pre-fills the form. You review and submit.</p>
+    <div class="card-num">Card 3 · Bonus 1</div>
+    <h3 class="card-title">Batch mode — process specific URLs</h3>
+    <p class="card-purpose">Already have roles bookmarked? Paste up to 10 URLs. Claude fans out via sub-agents and returns one consolidated CSV.</p>
   </div>
   <div class="card-body">
-    <p>Only attempt this if you finished Cards 0 through 5 with time to spare.</p>
+    <p>Replace the placeholder URLs with real ones. Then paste.</p>
     <div class="prompt-wrap">
-      <pre class="prompt" id="p6"><span class="c"># Card 6 — Add browser auto-fill (Tier 2)</span>
+      <pre class="prompt" id="p6"><span class="c"># Card 6 — Batch mode: specific job URLs</span>
 
-Extend the job-hunt-copilot skill to optionally use Playwright to open the job's apply page in a browser and pre-fill the application form.
+Use the job-hunt-copilot skill in batch mode on these URLs:
 
-Behavior:
-- Only triggered when I add <span class="s">--apply</span> to my request (e.g., "use job-hunt-copilot on URL --apply")
-- Detects whether the apply URL is on a supported site (Lever, Greenhouse, Ashby)
-- Opens the apply page in a visible browser window (not headless)
-- Pre-fills: name, email, phone, LinkedIn URL, resume upload, cover letter (use the cold email draft as cover letter content)
-- For any field that requires judgment (custom essays, salary expectations, why-this-company), STOP and ask me before filling
-- NEVER click the Submit button. Leave the page open for me to review and submit manually.
+<span class="s">[paste URL 1]
+[paste URL 2]
+[paste URL 3]
+... up to 10</span>
 
-If the site is unsupported, fall back to: open the apply URL in my default browser and tell me what to fill where.
+Spawn one sub-agent per URL. Each runs the full pipeline:
+parse JD, tailor resume, research contact, draft email and
+LinkedIn message, save to its own output folder.
 
-Install playwright if not already installed.
+After all sub-agents complete:
+- Merge into one pipeline CSV: ~/claude-outputs/job-hunt/batch-{date}.csv
+- Update tracker.xlsx
+- Show me a ranked summary: Company | Role | Fit Score (1–5) | Reason
+- Highlight the 3 strongest matches
 
-Update SKILL.md to document the new --apply flag.</pre>
+Limit: max 10 URLs. 5-second pause between sub-agent launches.</pre>
       <button class="copy-btn" data-target="p6">Copy</button>
     </div>
-    <div class="warn">
-      <strong>This card may install Playwright.</strong> First-time installs can take 1 to 2 minutes. The browser window that opens IS your browser. Don't close it during the demo.
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- CARD 7 · Batch mode -->
-<!-- ============================================================ -->
-<section class="card" id="card-7">
-  <div class="card-head">
-    <div class="card-num">Card 7 · Bonus 2</div>
-    <h3 class="card-title">Batch mode (10 jobs at once)</h3>
-    <p class="card-purpose">Paste multiple URLs. Claude fans out via sub-agents, processes all in parallel, returns one consolidated summary.</p>
-  </div>
-  <div class="card-body">
-    <p>This card teaches the skill how to handle a list of jobs.</p>
-    <div class="prompt-wrap">
-      <pre class="prompt" id="p7"><span class="c"># Card 7 — Add batch mode (Tier 2)</span>
-
-Extend the job-hunt-copilot skill to support batch mode.
-
-Behavior:
-- Triggered when I provide more than one job URL in a single request, OR when I add <span class="s">--batch</span> to my request
-- Spawn one sub-agent per job URL (use the Agent tool)
-- Each sub-agent runs the full pipeline for its assigned job (parse JD, tailor resume, draft email and LinkedIn note, research hiring manager, save to its own folder)
-- After all sub-agents complete, the parent agent:
-  1. Updates the tracker xlsx with one row per job
-  2. Produces a single summary report at <span class="s">~/claude-outputs/job-hunt/batch-{date}.md</span> showing all jobs processed and a one-line status per job
-  3. Highlights the 3 jobs with the strongest fit based on resume keyword overlap
-
-<span class="h">Rate limit safety:</span>
-- Maximum 10 jobs per batch
-- If more than 10 URLs are provided, process the first 10 and tell me the rest are queued
-- Add a 5-second delay between sub-agent launches to be polite to job sites
-
-Update SKILL.md to document batch mode.</pre>
-      <button class="copy-btn" data-target="p7">Copy</button>
-    </div>
     <div class="tip">
-      <strong>This is your first sub-agent skill.</strong> Notice how the same pattern (skill orchestrating sub-agents) underpins everything from research to outreach to data pipelines.
+      <strong>This is your first sub-agent pattern.</strong> One orchestrator, many workers, one consolidated output. The same shape runs research pipelines, data jobs, and multi-source analysis.
     </div>
   </div>
 </section>
 
 <!-- ============================================================ -->
-<!-- CARD 8 · Meeting Prep Copilot -->
+<!-- CARD 4 · Meeting Prep Copilot -->
 <!-- ============================================================ -->
-<section class="card" id="card-8">
+<section class="card" id="card-4">
   <div class="card-head">
-    <div class="card-num">Card 8 · Bonus 3</div>
+    <div class="card-num">Card 4 · Bonus 2</div>
     <h3 class="card-title">Build Meeting Prep Copilot (one paste)</h3>
-    <p class="card-purpose">A different skill. Same pattern. Paste once, get a working meeting-brief skill you'll use every week.</p>
+    <p class="card-purpose">Same architecture, different domain. Build a second skill you'll use every week — and prove the pattern generalizes.</p>
   </div>
   <div class="card-body">
-    <p>The Job Hunt build is hiring-focused. This card proves the pattern generalizes: swap the domain, keep the architecture, get a new skill in a single prompt.</p>
+    <p>This card builds a completely different skill from scratch in a single prompt. Notice how the shape is identical to what you just built.</p>
     <div class="prompt-wrap">
-      <pre class="prompt" id="p8"><span class="c"># Card 8 — Build Meeting Prep Copilot</span>
+      <pre class="prompt" id="p7"><span class="c"># Card 7 — Build Meeting Prep Copilot</span>
 
-Create a new skill called <span class="s">"meeting-prep"</span> at <span class="s">~/.claude/skills/meeting-prep/</span>
+Create a skill called <span class="s">"meeting-prep"</span> at
+<span class="s">~/.claude/skills/meeting-prep/SKILL.md</span>
 
-The skill should accept any of the following:
-- A calendar invite pasted as text
-- A path to a .ics file
-- A list of attendees + subject + date
+<span class="h">Inputs:</span>
+- Calendar invite pasted as text
+- Path to a .ics file
+- Attendees + subject + date typed directly
 
-For each meeting, produce a one-page brief with:
-1. <span class="h">Attendee profiles</span> — title, company, public background, one memorable detail per person (no LinkedIn scraping, use public web search)
-2. <span class="h">Company context</span> — what they do, recent news, competitive position
-3. <span class="h">Likely agenda</span> — inferred from subject line and attendee mix
-4. <span class="h">Five smart questions to ask</span>
-5. <span class="h">Three things I should have ready</span>
-6. <span class="h">Pre-meeting "gotcha" check</span> — any open asks, promised follow-ups, action items from the last meeting with these people
+<span class="h">For each meeting, produce a one-page brief:</span>
+1. Attendee profiles — title, company, public background,
+   one memorable detail per person. Search LinkedIn and the web.
+2. Company context — what they do, recent news, funding, competitors
+3. Likely agenda — inferred from subject and attendee mix
+4. Five smart questions to ask
+5. Three things to have ready before the meeting
+6. Open items check — any follow-ups from previous meetings
+   with these people (from memory)
 
-Save outputs to: <span class="s">~/claude-outputs/meeting-prep/{date}-{subject-slug}.md</span>
+<span class="h">Memory pattern (same as Job Hunt Copilot):</span>
+- First run: ask for my role, company, and focus areas. Save. Never re-ask.
+- Maintain a frequent-attendees file — reuse research, don't repeat searches.
+- Save my format preference (default: executive bullets, max 1 page).
 
-<span class="h">Memory pattern:</span>
-- On first run, ask me for: my role, company, focus areas. Save to memory. Never re-ask.
-- Maintain a "frequent attendees" file. If I've already met someone, reuse the research instead of re-doing it.
-- Save my tone preference for the brief (default: executive bullets, max one page).
+<span class="h">Output:</span>
+~/claude-outputs/meeting-prep/{date}-{subject-slug}.md
+Always a file. Never just a chat reply.
 
-<span class="h">Critical rules:</span>
-- Output is always a file on disk, never just a chat reply
-- Bullets, not paragraphs. Max one page.
-- If you can't find reliable info on an attendee, say "limited public info" rather than guess.
+<span class="h">Trigger phrase:</span> "prep me for" + any meeting description
 
-Write SKILL.md with proper frontmatter (name, description, when_to_use). When done, show me the SKILL.md content.</pre>
-      <button class="copy-btn" data-target="p8">Copy</button>
+Rules: bullets not paragraphs, max 1 page, say "limited public info"
+rather than guess on an attendee.
+
+Write SKILL.md with proper frontmatter. Print it when done.</pre>
+      <button class="copy-btn" data-target="p7">Copy</button>
     </div>
     <div class="checklist">
       <strong>Done when:</strong>
       <ul>
         <li><code>~/.claude/skills/meeting-prep/SKILL.md</code> exists</li>
-        <li>The skill asks for your profile on first run (and never again)</li>
-        <li>Run it on a real calendar invite and check that a brief lands in <code>~/claude-outputs/meeting-prep/</code></li>
+        <li>Try it: say "prep me for a call with [name] at [company] on [date]"</li>
+        <li>A brief lands in <code>~/claude-outputs/meeting-prep/</code></li>
       </ul>
     </div>
     <div class="tip">
-      <strong>Notice the shape.</strong> Skill folder. Memory pattern. Outputs as files. Tone preferences. Same architecture as Job Hunt Copilot. Once you've seen the pattern twice, you own it.
+      <strong>Notice the shape.</strong> Skill folder. Intake saved to memory. Outputs as files. Tone preference. You built Job Hunt Copilot and Meeting Prep Copilot with the same pattern. Once you own the pattern, you can build anything you do twice a week.
     </div>
   </div>
 </section>
 
 <footer>
-  <p><strong style="color: var(--ink);">Got it working?</strong> Email <a href="mailto:sharan.jm16@gmail.com">sharan.jm16@gmail.com</a> or reach me on <a href="https://www.linkedin.com/in/sharanjm/" target="_blank">LinkedIn</a>.</p>
+  <p><strong style="color: var(--ink);">Built something?</strong> Email <a href="mailto:sharan.jm16@gmail.com">sharan.jm16@gmail.com</a> or reach me on <a href="https://www.linkedin.com/in/sharanjm/" target="_blank">LinkedIn</a>.</p>
   <p>I'll send back a critique plus ideas to extend it.</p>
   <p style="margin-top: 24px;">ASB Workshop · April 2026 · Sharan JM</p>
 </footer>
